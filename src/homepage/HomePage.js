@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import styles from "../reusables/Styles";
 import Showcase from "../reusables/Showcase";
+import Timeline from "../reusables/Timeline";
 
 const tileData = [
   {
@@ -44,14 +45,19 @@ class HomePage extends React.Component {
     return (
       <main>
         <CssBaseline />
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start"
+          }}
+        >
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              margin: "25px",
-              flexGrow: 5,
-              flexBasis: "auto"
+              padding: "25px",
+              flex: 2
             }}
           >
             <Showcase title="Newest Release" tileData={tileData} />
@@ -61,13 +67,11 @@ class HomePage extends React.Component {
             style={{
               display: "flex",
               flexDirection: "column",
-              margin: "25px",
-              flexGrow: 1,
-              flexBasis: "auto"
+              //   padding: "25px",
+              flex: 1
             }}
           >
-            <Showcase title="Newest Release" tileData={tileData} />
-            <Showcase title="Most Popular" tileData={tileData} />
+            <Timeline />
           </div>
         </div>
       </main>

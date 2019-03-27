@@ -9,29 +9,14 @@ import styles from "./Styles";
 
 class EntryLine extends React.Component {
   render() {
-    const { icon, children } = this.props;
+    const { icon, ...children } = this.props;
     return (
       <Grid spacing={16} container alignItems={"center"}>
         <Grid item xs={1}>
           <Icon path={icon} />
         </Grid>
         <Grid item xs={11}>
-          <TextField
-            {...children}
-            //   id="email"
-            //   name="email"
-            //   label="Enter Your Email Address"
-            //   margin="normal"
-            //   variant="filled"
-            //   value={email}
-            //   onChange={this.handleEmailChange}
-            //   onFocus={this.handleEmailFocus}
-            //   onBlur={this.handleEmailBlur}
-            //   error={!emailValid && email.length > 0 && !emailFocus}
-            //   helperText={emailHelpMessage}
-            //   fullWidth
-            //   required
-          />
+          <TextField {...children} />
         </Grid>
       </Grid>
     );

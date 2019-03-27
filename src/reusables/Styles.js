@@ -75,7 +75,8 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
-    alignItems: "space-around"
+    alignItems: "space-around",
+    paddingBottom: "25px"
   },
   gridList: {
     flexWrap: "nowrap",
