@@ -1,0 +1,152 @@
+{
+  "media": [
+    {
+      "id": 1,
+      "title": "Black Mirror: Bandersnatch",
+      "type": "movie",
+      "description": "In 1984, a young programmer begins to question reality as he works to adapt a fantasy novel into a video game.",
+      "start Date": "28 December 2018",
+      "end Date": "28 December 2018",
+      "duration": "1h 30min",
+      "episodes": 1,
+      "genres": "Drama, Mystery, Sci-Fi",
+      "averageScore": 7.3,
+      "coverImage": "https://m.media-amazon.com/images/M/MV5BMjM5MzgzMjM3OF5BMl5BanBnXkFtZTgwMzQ2MzQwNzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+      "bannerImage": "https://techcrunch.com/wp-content/uploads/2019/01/Black-Mirror-Bandersnatch-11.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Silicon Valley ",
+      "type": "tv",
+      "description": "Follows the struggle of Richard Hendricks, a Silicon Valley engineer trying to build his own company called Pied Piper.",
+      "start Date": "6 April 2014",
+      "end Date": "Present",
+      "duration": "28 min",
+      "episodes": 46,
+      "genres": "Comedy",
+      "averageScore": 8.5,
+      "coverImage": "https://m.media-amazon.com/images/M/MV5BMTAxNTEyODE5MTNeQTJeQWpwZ15BbWU4MDE3MjM3ODQz._V1_SY1000_CR0,0,675,1000_AL_.jpg",
+      "bannerImage": "https://meplustv.files.wordpress.com/2016/07/siliconvalleybanner.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Star Wars: Episode IV - A New Hope",
+      "type": "movie",
+      "description": "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
+      "start Date": "25 May 1977",
+      "end Date": "25 May 1977",
+      "duration": "2h 1min",
+      "episodes": 1,
+      "genres": "Action, Adventure, Fantasy",
+      "averageScore": 8.6,
+      "coverImage": "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,643,1000_AL_.jpg",
+      "bannerImage": "https://m.media-amazon.com/images/M/MV5BMjMzOTU0NzAwMV5BMl5BanBnXkFtZTgwODAwNzU0NzE@._V1_UX477_CR0,0,477,268_AL_.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Attack on Titan",
+      "type": "tv",
+      "description": "After his hometown is destroyed and his mother is killed, young Eren Yeager vows to cleanse the earth of the giant humanoid Titans that have brought humanity to the brink of extinction.",
+      "start Date": "7 April 2013",
+      "end Date": "29 September 2013",
+      "duration": "24 min",
+      "episodes": 25,
+      "genres": "Action, Military, Mystery, Super Power, Drama, Fantasy, Shounen",
+      "averageScore": 8.0,
+      "coverImage": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg",
+      "bannerImage": "https://i0.wp.com/chetumalmosaico.com/wp-content/uploads/2018/12/attack-on-titan-season-2-banner-gamers-elite-intended-for-attack-on-titan-banner-photo.jpg?w=1187&ssl=1"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "Jrogin",
+      "password": "hunter1",
+      "email": "jrogin@example.com"
+    },
+    {
+      "id": 2,
+      "username": "tseries",
+      "password": "hunter2",
+      "email": "tseries22@yahoo.com"
+    },
+    {
+      "id": 3,
+      "username": "betaman",
+      "password": "hunter3",
+      "email": "bman@yahoo.com"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "userId": 1,
+      "mediaId": 1,
+      "reviewText": "Vivamus viverra luctus hendrerit. Curabitur eget sollicitudin tortor, sit amet.",
+      "Score": 10
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "mediaId": 1,
+      "reviewText": "Vivamus viverra luctus hendrerit. Curabitur eget sollicitudin tortor, sit amet.",
+      "Score": 7
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "mediaId": 2,
+      "reviewText": "Vestibulum a mauris porta, finibus justo sit amet, volutpat magna.",
+      "Score": 8
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "mediaId": 2,
+      "reviewText": "Duis at mauris purus. Aliquam tincidunt dui porttitor, ultrices erat eget, pulvinar elit. Nunc in velit in nisl tempor convallis non at nisl. Nulla lacinia, lorem in ornare imperdiet, orci.",
+      "Score": 1
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "mediaId": 3,
+      "reviewText": "Duis quam ex, imperdiet eu scelerisque eget, ullamcorper a nunc. Nulla semper eros in risus vulputate varius. Donec quam augue, vulputate ut tempor non, elementum ut felis. Vestibulum tincidunt nisl at viverra vehicula. Proin mattis vestibulum convallis. Aenean vehicula, nisl vitae consequat auctor, orci risus sollicitudin nisl, vel malesuada augue turpis a est. Aenean volutpat dignissim libero quis ullamcorper. Aenean.",
+      "Score": 7
+    },
+    {
+      "id": 6,
+      "userId": 3,
+      "mediaId": 3,
+      "reviewText": "Pellentesque ut elit non sem pellentesque hendrerit. Fusce in auctor.",
+      "Score": 10
+    },
+    {
+      "id": 7,
+      "userId": 2,
+      "mediaId": 4,
+      "reviewText": "In mollis urna eu ante efficitur mollis. Donec mi justo, malesuada in hendrerit interdum, commodo sed justo. Suspendisse lobortis rutrum.",
+      "Score": 10
+    },
+    {
+      "id": 8,
+      "userId": 1,
+      "mediaId": 4,
+      "reviewText": "Vestibulum commodo eros vitae leo ultricies scelerisque. Etiam a augue eu quam hendrerit cursus. Morbi mattis sollicitudin porttitor. Integer faucibus sit amet purus ac sodales. Sed nec laoreet elit. Nulla ac neque pretium, venenatis ex faucibus, semper velit. Nullam blandit magna interdum, congue odio non, dignissim velit. Aenean congue augue non sollicitudin pretium. Morbi dapibus dui vel mauris elementum, vitae vestibulum velit ornare. Sed at.",
+      "Score": 3
+    }
+  ],
+  "lists": [
+    {
+      "id": 1,
+      "userid": 1
+    },
+    {
+      "id": 2,
+      "userid": 2
+    },
+    {
+      "id": 3,
+      "userid": 3
+    }
+  ]
+}

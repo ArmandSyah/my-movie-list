@@ -28,7 +28,7 @@ class NavBar extends React.Component {
 
             <div className={classes.sectionDesktop}>
               <Tooltip title="Browse">
-                <IconButton>
+                <IconButton onClick={handleCurrentPageChange("browse")}>
                   <Search style={{ paddingRight: "2px" }} />
                   Browse
                 </IconButton>

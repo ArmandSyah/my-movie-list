@@ -3,10 +3,13 @@ import NavBar from "./navbar/NavBar";
 import HomePage from "./homepage/HomePage";
 import SignupPage from "./signuppage/SignupPage";
 import LoginPage from "./loginpage/LoginPage";
+import BrowsePage from "./browsepage/BrowsePage";
 import "./App.css";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+
+import customBackendData from "./backend.json";
 
 const theme = createMuiTheme({
   palette: {
@@ -39,10 +42,12 @@ class App extends Component {
   };
 
   render() {
+    console.log(customBackendData.reviews[0]);
     const pages = {
       home: <HomePage />,
       signup: <SignupPage handleLoginState={this.handleLoginState} />,
-      login: <LoginPage />
+      login: <LoginPage />,
+      browse: <BrowsePage />
     };
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
