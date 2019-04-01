@@ -25,28 +25,49 @@ class MediaInfo extends React.Component {
           </Button>
           <Button variant="contained">Write Review</Button>
         </div>
-        <div style={{ marginLeft: "5%", overflow: "auto", maxWidth: "510px" }}>
+        <div
+          style={{
+            marginLeft: "5%",
+            overflow: "auto",
+            minWidth: "510px",
+            maxWidth: "510px"
+          }}
+        >
           <Paper>
             <Typography variant="h4" style={{ padding: "2%" }}>
               Reviews
             </Typography>
             <Divider />
             <List>
-              {reviews.map((review, index) => {
-                const userId = review.userId;
-                const user = users.filter(u => u.id === userId)[0];
-                return (
-                  <div>
-                    <ListItem>
-                      <ListItemText
-                        primary={`${user.username} - Score: ${review.Score}/10`}
-                        secondary={`${review.reviewText}`}
-                      />
-                    </ListItem>
-                    {index !== reviews.length - 1 && <Divider />}
-                  </div>
-                );
-              })}
+              {reviews.length === 0 ? (
+                <div>
+                  <ListItem>
+                    <ListItemText
+                      primary={
+                        "No reviews have been written yet. You can be the first one!"
+                      }
+                    />
+                  </ListItem>
+                </div>
+              ) : (
+                reviews.map((review, index) => {
+                  const userId = review.userId;
+                  const user = users.filter(u => u.id === userId)[0];
+                  return (
+                    <div>
+                      <ListItem>
+                        <ListItemText
+                          primary={`${user.username} - Score: ${
+                            review.Score
+                          }/10`}
+                          secondary={`${review.reviewText}`}
+                        />
+                      </ListItem>
+                      {index !== reviews.length - 1 && <Divider />}
+                    </div>
+                  );
+                })
+              )}
             </List>
           </Paper>
         </div>

@@ -47,7 +47,7 @@
       "title": "My Hero Academia",
       "type": "tv",
       "description": "Izuku has dreamt of being a hero all his life—a lofty goal for anyone, but especially challenging for a kid with no superpowers. That’s right, in a world where eighty percent of the population has some kind of super-powered “quirk,” Izuku was unlucky enough to be born completely normal. But that’s not enough to stop him from enrolling in one of the world’s most prestigious hero academies",
-      "start date": "April 3, 2016",
+      "start date": "3 April 2016",
       "end date": "Present",
       "duration": "25min",
       "episode": 63,
@@ -55,6 +55,20 @@
       "averageScore": 8,
       "coverImage": "https://img1.ak.crunchyroll.com/i/spire1/281089c6a9e64236a10e3b4232474e411532451975_full.jpg",
       "bannerImage": "http://asuzanneflynn.com/wp-content/uploads/2017/05/banner_3540.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Mr. Robot",
+      "type": "tv",
+      "description": "Elliot, a brilliant but highly unstable young cyber-security engineer and vigilante hacker, becomes a key figure in a complex game of global dominance when he and his shadowy allies try to take down the corrupt corporation he works for.",
+      "start date": "24 June 2015",
+      "end date": "Present",
+      "duration": "41min",
+      "episodes": "32",
+      "genres": "Drama, Techno thriller, Psychological thriller",
+      "averageScore": 10,
+      "coverImage": "http://www.gstatic.com/tv/thumb/tvbanners/14461667/p14461667_b_v8_aa.jpg",
+      "bannerImage": "https://popculthq.com/wp-content/uploads/2016/03/MrRobot-banner-e1459195349633.jpg"
     }
   ],
   "users": [
@@ -147,6 +161,44 @@
     {
       "id": 3,
       "userid": 3
+    }
+  ],
+  "listEntries": [
+    {
+      "id": 1,
+      "listId": 1,
+      "mediaId": 1,
+      "progress": 1,
+      "score": 10,
+      "status": "Finished",
+      "lastUpdated": "April 1, 2019"
+    },
+    {
+      "id": 2,
+      "listId": 1,
+      "mediaId": 2,
+      "progress": 24,
+      "score": 7,
+      "status": "Currently Watching",
+      "lastUpdated": "April 24, 2019"
+    },
+    {
+      "id": 3,
+      "listId": 1,
+      "mediaId": 3,
+      "progress": 1,
+      "score": 4,
+      "status": "Finished",
+      "lastUpdated": "April 2, 2019"
+    },
+    {
+      "id": 4,
+      "listId": 1,
+      "mediaId": 4,
+      "progress": 1,
+      "score": 10,
+      "status": "Finished",
+      "lastUpdated": "April 5, 2019"
     }
   ]
 }

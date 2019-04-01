@@ -4,43 +4,54 @@ import {
   VerticalTimelineElement
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { DatePicker } from "material-ui-pickers";
 
-import {
-  Button,
-  Typography,
-  withStyles,
-  CssBaseline,
-  Modal,
-  Slide,
-  IconButton,
-  TextField
-} from "@material-ui/core";
-import Icon from "@mdi/react";
-import { mdiBaby, mdiNeedle, mdiPlusCircle, mdiClose } from "@mdi/js";
-
+import { Typography, withStyles, CssBaseline } from "@material-ui/core";
+import { indigo, green, red } from "@material-ui/core/colors";
 import styles from "./Styles";
 
-const addDays = (date, days) => {
-  var result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
+const statusColor = {
+  Finished: green[700],
+  "Currently Watching": indigo[700],
+  Dropped: red[700]
 };
 
-class VaccinationRecord extends React.Component {
+class ActivityRecord extends React.Component {
   render() {
-    const { name, vaccinationDate, vaccineName } = this.props;
-    const options = { year: "numeric", month: "long", day: "numeric" };
-
+    const { entry, media } = this.props;
+    const { status, mediaId, lastUpdated } = entry;
+    const mediaEntry = media.filter(m => m.id === mediaId)[0];
     return (
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
-        date={vaccinationDate.toLocaleDateString("en-US", options)}
-        iconStyle={{ background: "#87A878", color: "#fff" }}
-        icon={<Icon path={mdiNeedle} />}
+        date={lastUpdated}
+        iconStyle={{ background: statusColor[status], color: "#fff" }}
       >
-        <h3 className="vertical-timeline-element-title">{`${name} received a vacination for ${vaccineName}`}</h3>
+        <h4 className="vertical-timeline-element-title">{`${status} - ${
+          mediaEntry.title
+        }`}</h4>
       </VerticalTimelineElement>
+    );
+  }
+}
+
+class LogoutPreview extends React.Component {
+  render() {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          paddingTop: "30px",
+          paddingLeft: "30px"
+        }}
+      >
+        <CssBaseline />
+        <Typography component="h1" variant="h4">
+          Log in or Sign up, to see your Activity Timeline
+        </Typography>
+      </div>
     );
   }
 }
@@ -49,97 +60,47 @@ class Timeline extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      datesUsed: [this.props.dateOfBirth],
-      events: [],
-      today: Date.now(),
-      latestVaccinationDate: Date.now(),
-      openAddModal: false
+      records: []
     };
   }
 
   componentDidMount() {
-    const { name, dateOfBirth } = this.props;
-    const { datesUsed } = this.state;
-    const es = [];
+    const { currentUserListEntries, media } = this.props;
+    const entriesToShow = currentUserListEntries.slice(0, 3);
+    entriesToShow.sort((a, b) => {
+      const aDate = a["lastUpdated"];
+      const bDate = b["lastUpdated"];
 
-    let days = 60;
-    const vaccineList1 = ["diphtheria", "tetanus", "pertusis"];
-    vaccineList1.forEach(vaccine => {
-      es.unshift(
-        <VaccinationRecord
-          name={name}
-          vaccinationDate={addDays(dateOfBirth, days)}
-          vaccineName={vaccine}
-        />
-      );
-      datesUsed.unshift(addDays(dateOfBirth, days));
-      days += 7;
+      return new Date(bDate) - new Date(aDate);
     });
-
-    this.setState({ events: es });
+    this.setState({
+      records: entriesToShow.map(entry => (
+        <ActivityRecord entry={entry} media={media} />
+      ))
+    });
   }
 
-  handleModalAddVaccinationRecord = () => {
-    this.setState({ openAddModal: true });
-  };
-
-  handleModalClose = () => {
-    this.setState({ openAddModal: false });
-  };
-
-  addNewVaccinationRecord = (vaccineName, vaccinationDate) => {
-    const { name } = this.props;
-    const { datesUsed, events } = this.state;
-    const record = (
-      <VaccinationRecord
-        name={name}
-        vaccinationDate={vaccinationDate}
-        vaccineName={vaccineName}
-      />
-    );
-    var trueIndex = -1;
-    let trueIndexFound = false;
-    datesUsed.forEach((date, index) => {
-      if (!trueIndexFound) {
-        if (datesUsed.length === index + 1) {
-          trueIndex = index;
-          trueIndexFound = true;
-        } else if (date <= vaccinationDate && date >= datesUsed[index + 1]) {
-          trueIndex = index;
-          trueIndexFound = true;
-        }
-      }
-    });
-
-    events.splice(trueIndex, 0, record);
-    datesUsed.splice(trueIndex, 0, vaccinationDate);
-
-    this.setState({ events, datesUsed, openAddModal: false });
-  };
-
   render() {
-    const { classes } = this.props;
-    const { events } = this.state;
-
+    const { classes, isLoggedIn } = this.props;
+    const { records } = this.state;
+    console.log(records);
     return (
       <main className={classes.main}>
         <CssBaseline />
         <div
           style={{
-            paddingTop: "30px",
             display: "flex",
             flexDirection: "column"
           }}
         >
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            style={{ marginTop: "10px", marginBottom: "10px" }}
-          >
+          <Typography component="h1" variant="h2" align="center">
             Activity Timeline
           </Typography>
-          <VerticalTimeline layout="2-columns">{events}</VerticalTimeline>
+          {!isLoggedIn ? (
+            <LogoutPreview />
+          ) : (
+            <VerticalTimeline layout="1-column">{records}</VerticalTimeline>
+          )}
         </div>
       </main>
     );

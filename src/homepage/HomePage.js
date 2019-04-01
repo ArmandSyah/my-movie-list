@@ -33,7 +33,12 @@ class HomePage extends React.Component {
     };
   }
   render() {
-    const { handleEnteringMediaEntry } = this.props;
+    const {
+      handleEnteringMediaEntry,
+      currentUserListEntries,
+      media,
+      isLoggedIn
+    } = this.props;
     const { newestMedia, mostPopularMedia } = this.state;
 
     return (
@@ -69,11 +74,14 @@ class HomePage extends React.Component {
             style={{
               display: "flex",
               flexDirection: "column",
-              //   padding: "25px",
               flex: 1
             }}
           >
-            <Timeline />
+            <Timeline
+              currentUserListEntries={currentUserListEntries}
+              media={media}
+              isLoggedIn={isLoggedIn}
+            />
           </div>
         </div>
       </main>

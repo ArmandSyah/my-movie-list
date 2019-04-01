@@ -28,7 +28,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    //width: "100%", // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing.unit
   },
   submit: {
@@ -56,10 +56,9 @@ const styles = theme => ({
     flexGrow: 1
   },
   sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex"
-    }
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   },
   control: {
     padding: theme.spacing.unit * 2
@@ -127,6 +126,9 @@ const styles = theme => ({
     maxHeight: "95px",
     width: "auto",
     height: "auto"
+  },
+  navbarTooltip: {
+    borderRadius: "0px"
   }
 });
 

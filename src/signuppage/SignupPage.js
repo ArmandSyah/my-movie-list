@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { mdiEmail, mdiLockQuestion, mdiAccount } from "@mdi/js";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import styles from "../reusables/Styles";
 import ReusablePaper from "../reusables/ReusablePaper";
@@ -39,10 +37,9 @@ class SignupPage extends React.Component {
     usernameValid = username.length > 0;
 
     if (usernameValid) {
-      usernameHelpMessage = "Email is properly formatted";
+      usernameHelpMessage = "Username is properly formatted";
     } else {
-      usernameHelpMessage =
-        "Type a proper email address (ex: example@test.com)";
+      usernameHelpMessage = "Type a proper username";
     }
 
     this.setState({
@@ -153,6 +150,14 @@ class SignupPage extends React.Component {
     this.setState({ confirmedPasswordFocus: false });
   };
 
+  handleSubmit = event => {
+    console.log("Something happenign");
+    event.preventDefault();
+    const { handleSignup } = this.props;
+    const { username, email, password } = this.state;
+    handleSignup(email, username, password)(event);
+  };
+
   renderEntryFields() {
     const {
       username,
@@ -182,9 +187,9 @@ class SignupPage extends React.Component {
           margin="normal"
           variant="filled"
           value={username}
-          onChange={this.handleEmailChange}
-          onFocus={this.handleEmailFocus}
-          onBlur={this.handleEmailBlur}
+          onChange={this.handleUsernameChange}
+          onFocus={this.handleUsernameFocus}
+          onBlur={this.handleUsernameBlur}
           error={!usernameValid && username.length > 0 && !usernameFocus}
           helperText={usernameHelpMessage}
           fullWidth
@@ -252,11 +257,13 @@ class SignupPage extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, handleSignup } = this.props;
     const {
+      username,
       email,
       password,
       confirmedPassword,
+      usernameValid,
       emailValid,
       passwordValid,
       confirmedPasswordValid
@@ -278,14 +285,16 @@ class SignupPage extends React.Component {
               variant="contained"
               color="primary"
               disabled={
+                username.length === 0 ||
                 email.length === 0 ||
                 password.length === 0 ||
                 confirmedPassword.length === 0 ||
+                !usernameValid ||
                 !emailValid ||
                 !passwordValid ||
                 !confirmedPasswordValid
               }
-              onClick={this.props.handleLoginState}
+              onClick={this.handleSubmit}
               className={classes.submit}
             >
               Create Account
