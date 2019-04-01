@@ -12,14 +12,14 @@ import styles from "../reusables/Styles";
 
 class ListMode extends React.Component {
   render() {
-    const { classes, media } = this.props;
+    const { classes, media, handleEnteringMediaEntry } = this.props;
     return (
       <div style={{ alignSelf: "stretch" }}>
         <div className={classes.demo}>
           <List>
             {media.map(m => (
               <div>
-                <ListItem button>
+                <ListItem button onClick={handleEnteringMediaEntry(m.id)}>
                   <ListItemAvatar>
                     <Avatar
                       src={m.coverImage}

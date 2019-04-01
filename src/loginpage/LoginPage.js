@@ -146,9 +146,6 @@ class LoginPage extends React.Component {
       <main className={classes.main}>
         <CssBaseline />
         <ReusablePaper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
             Login to MyMovieList
           </Typography>

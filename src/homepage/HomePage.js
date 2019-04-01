@@ -6,42 +6,36 @@ import styles from "../reusables/Styles";
 import Showcase from "../reusables/Showcase";
 import Timeline from "../reusables/Timeline";
 
-const tileData = [
-  {
-    img:
-      "https://globalgamejam.org/sites/default/files/styles/game_sidebar__normal/public/game/featured_image/promo_5.png?itok=9dymM8JD",
-    title: "image",
-    author: "Armand"
-  },
-  {
-    img:
-      "https://globalgamejam.org/sites/default/files/styles/game_sidebar__normal/public/game/featured_image/promo_5.png?itok=9dymM8JD",
-    title: "image",
-    author: "Armand"
-  },
-  {
-    img:
-      "https://globalgamejam.org/sites/default/files/styles/game_sidebar__normal/public/game/featured_image/promo_5.png?itok=9dymM8JD",
-    title: "image",
-    author: "Armand"
-  },
-  {
-    img:
-      "https://globalgamejam.org/sites/default/files/styles/game_sidebar__normal/public/game/featured_image/promo_5.png?itok=9dymM8JD",
-    title: "image",
-    author: "Armand"
-  },
-  {
-    img:
-      "https://globalgamejam.org/sites/default/files/styles/game_sidebar__normal/public/game/featured_image/promo_5.png?itok=9dymM8JD",
-    title: "image",
-    author: "Armand"
-  }
-];
-
 class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+    const { media } = this.props;
+
+    const newestMedia = [...media];
+    const mostPopularMedia = [...media];
+
+    newestMedia.sort((a, b) => {
+      const aDate = a["start date"];
+      const bDate = b["start date"];
+
+      return new Date(bDate) - new Date(aDate);
+    });
+
+    mostPopularMedia.sort((a, b) => {
+      const aScore = a.averageScore;
+      const bScore = b.averageScore;
+
+      return bScore - aScore;
+    });
+    this.state = {
+      newestMedia,
+      mostPopularMedia
+    };
+  }
   render() {
-    const { classes } = this.props;
+    const { handleEnteringMediaEntry } = this.props;
+    const { newestMedia, mostPopularMedia } = this.state;
+
     return (
       <main>
         <CssBaseline />
@@ -60,8 +54,16 @@ class HomePage extends React.Component {
               flex: 2
             }}
           >
-            <Showcase title="Newest Release" tileData={tileData} />
-            <Showcase title="Most Popular" tileData={tileData} />
+            <Showcase
+              title="Newest Release"
+              tileData={newestMedia}
+              handleEnteringMediaEntry={handleEnteringMediaEntry}
+            />
+            <Showcase
+              title="Most Popular"
+              tileData={mostPopularMedia}
+              handleEnteringMediaEntry={handleEnteringMediaEntry}
+            />
           </div>
           <div
             style={{

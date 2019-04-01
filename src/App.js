@@ -15,12 +15,12 @@ import customBackendData from "./backend.json";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#4A86E8"
+      main: "#7d80d1"
     },
     secondary: {
-      main: "#6BCDFD"
+      main: "#9d9dc9"
     },
-    background: { default: "#6BCDFD" }
+    background: { default: "#9d9dc9", paper: "#edebff" }
   }
 });
 
@@ -30,7 +30,8 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       currentPage: "home",
-      backendData: customBackendData
+      backendData: customBackendData,
+      currentSelectedMediaId: 4
     };
   }
 
@@ -43,17 +44,34 @@ class App extends Component {
     this.setState({ currentPage: pageName });
   };
 
+  handleEnteringMediaEntry = mediaEntryId => () => {
+    this.setState({
+      currentSelectedMediaId: mediaEntryId,
+      currentPage: "mediaEntry"
+    });
+  };
+
   render() {
-    const { backendData } = this.state;
+    const { backendData, currentSelectedMediaId } = this.state;
     const pages = {
-      home: <HomePage />,
+      home: (
+        <HomePage
+          media={backendData.media}
+          handleEnteringMediaEntry={this.handleEnteringMediaEntry}
+        />
+      ),
       signup: <SignupPage handleLoginState={this.handleLoginState} />,
       login: <LoginPage />,
-      browse: <BrowsePage customBackendData={backendData} />,
+      browse: (
+        <BrowsePage
+          customBackendData={backendData}
+          handleEnteringMediaEntry={this.handleEnteringMediaEntry}
+        />
+      ),
       mediaEntry: (
         <MediaEntryPage
           media={backendData.media}
-          mediaId={1}
+          mediaId={currentSelectedMediaId}
           reviews={backendData.reviews}
           users={backendData.users}
         />
@@ -63,8 +81,8 @@ class App extends Component {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <MuiThemeProvider theme={theme}>
           <NavBar handleCurrentPageChange={this.handleCurrentPageChange} />
-          {/* {pages[this.state.currentPage]} */}
-          {pages["mediaEntry"]}
+          {pages[this.state.currentPage]}
+          {/* {pages["mediaEntry"]} */}
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>
     );

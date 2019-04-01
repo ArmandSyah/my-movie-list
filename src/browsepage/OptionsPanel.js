@@ -43,9 +43,9 @@ class OptionsPanel extends React.Component {
               onChange={handleChange}
               input={<FilledInput name="sort" id="filled-age-simple" />}
             >
-              <MenuItem value="none">None</MenuItem>
               <MenuItem value="name">Name</MenuItem>
               <MenuItem value="date">Date</MenuItem>
+              <MenuItem value="score">Score</MenuItem>
             </Select>
           </FormControl>
         </ReusablePaper>

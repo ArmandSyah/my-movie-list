@@ -11,7 +11,7 @@ import { Typography } from "@material-ui/core";
 
 class Showcase extends React.Component {
   render() {
-    const { classes, title, tileData } = this.props;
+    const { classes, title, tileData, handleEnteringMediaEntry } = this.props;
     return (
       <div className={classes.showcaseroot}>
         <Typography
@@ -24,11 +24,20 @@ class Showcase extends React.Component {
         </Typography>
         <GridList className={classes.gridList} cols={2} cellHeight="360">
           {tileData.map(tile => (
-            <GridListTile key={tile.img}>
-              <img src={tile.img} alt={tile.title} />
+            <GridListTile
+              key={tile.coverImage}
+              onClick={handleEnteringMediaEntry(tile.id)}
+              style={{ cursor: "pointer" }}
+            >
+              <img src={tile.coverImage} alt={tile.title} />
               <GridListTileBar
                 title={tile.title}
-                subtitle={<span>by: {tile.author}</span>}
+                subtitle={
+                  <span>
+                    Score: {tile.averageScore}/10 - Date: {tile["start date"]} -
+                    Type: {tile.type}
+                  </span>
+                }
                 actionIcon={
                   <IconButton className={classes.icon}>
                     <InfoIcon />

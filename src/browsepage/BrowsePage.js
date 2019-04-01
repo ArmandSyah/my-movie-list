@@ -29,7 +29,7 @@ class BrowsePage extends React.Component {
       searchResults: [],
       displayedResults: [],
       type: "all",
-      sort: "none"
+      sort: "name"
     };
   }
 
@@ -67,7 +67,14 @@ class BrowsePage extends React.Component {
           return new Date(aDate) - new Date(bDate);
         });
         break;
-      case "none":
+      case "score":
+        currentResults.sort((a, b) => {
+          const aScore = a.averageScore;
+          const bScore = b.averageScore;
+
+          return bScore - aScore;
+        });
+        break;
       default:
         break;
     }
@@ -140,13 +147,12 @@ class BrowsePage extends React.Component {
     const {
       searchEmpty,
       searchValue,
-      searchResults,
       displayedResults,
       loading,
       type,
       sort
     } = this.state;
-    const { classes } = this.props;
+    const { classes, handleEnteringMediaEntry } = this.props;
     return (
       <div
         style={{
@@ -198,7 +204,10 @@ class BrowsePage extends React.Component {
                   )
                 }}
               />
-              <ResultsDisplayer media={displayedResults} />
+              <ResultsDisplayer
+                media={displayedResults}
+                handleEnteringMediaEntry={handleEnteringMediaEntry}
+              />
               {loading && (
                 <CircularProgress
                   size={48}

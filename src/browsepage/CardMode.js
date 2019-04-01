@@ -11,13 +11,16 @@ import styles from "../reusables/Styles";
 
 class CardMode extends React.Component {
   render() {
-    const { classes, media } = this.props;
-    console.log(media);
+    const { classes, media, handleEnteringMediaEntry } = this.props;
     return (
       <div className={classes.cardModeRoot}>
         <GridList cellHeight={180} spacing={15}>
           {media.map(tile => (
-            <GridListTile key={tile.title}>
+            <GridListTile
+              key={tile.title}
+              onClick={handleEnteringMediaEntry(tile.id)}
+              style={{ cursor: "pointer" }}
+            >
               <img src={tile.coverImage} alt={tile.title} />
               <GridListTileBar
                 title={tile.title}

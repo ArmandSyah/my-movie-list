@@ -75,7 +75,9 @@ class MediaInfo extends React.Component {
           <Paper
             style={{ padding: "10px", marginTop: "20px", maxWidth: "234px" }}
           >
-            <Typography variant="h4">Information</Typography>
+            <Typography variant="h4" style={{ padding: "10px" }}>
+              Information
+            </Typography>
             <Divider />
             <div
               style={{

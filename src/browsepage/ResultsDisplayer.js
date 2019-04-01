@@ -20,7 +20,7 @@ class ResultsDisplayer extends React.Component {
 
   render() {
     const { displayMode } = this.state;
-    const { media, classes } = this.props;
+    const { media, classes, handleEnteringMediaEntry } = this.props;
     return (
       <div
         style={{ paddingTop: "25px", display: "flex", flexDirection: "column" }}
@@ -49,9 +49,15 @@ class ResultsDisplayer extends React.Component {
         </div>
         {media.length !== 0 &&
           (displayMode === "card" ? (
-            <CardMode media={media} />
+            <CardMode
+              media={media}
+              handleEnteringMediaEntry={handleEnteringMediaEntry}
+            />
           ) : (
-            <ListMode media={media} />
+            <ListMode
+              media={media}
+              handleEnteringMediaEntry={handleEnteringMediaEntry}
+            />
           ))}
       </div>
     );
