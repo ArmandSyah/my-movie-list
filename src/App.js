@@ -4,6 +4,7 @@ import HomePage from "./homepage/HomePage";
 import SignupPage from "./signuppage/SignupPage";
 import LoginPage from "./loginpage/LoginPage";
 import BrowsePage from "./browsepage/BrowsePage";
+import MediaEntryPage from "./mediaentrypage/MediaEntryPage";
 import "./App.css";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
@@ -28,7 +29,8 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      currentPage: "home"
+      currentPage: "home",
+      backendData: customBackendData
     };
   }
 
@@ -42,18 +44,27 @@ class App extends Component {
   };
 
   render() {
-    console.log(customBackendData.reviews[0]);
+    const { backendData } = this.state;
     const pages = {
       home: <HomePage />,
       signup: <SignupPage handleLoginState={this.handleLoginState} />,
       login: <LoginPage />,
-      browse: <BrowsePage />
+      browse: <BrowsePage customBackendData={backendData} />,
+      mediaEntry: (
+        <MediaEntryPage
+          media={backendData.media}
+          mediaId={1}
+          reviews={backendData.reviews}
+          users={backendData.users}
+        />
+      )
     };
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <MuiThemeProvider theme={theme}>
           <NavBar handleCurrentPageChange={this.handleCurrentPageChange} />
-          {pages[this.state.currentPage]}
+          {/* {pages[this.state.currentPage]} */}
+          {pages["mediaEntry"]}
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>
     );

@@ -1,10 +1,10 @@
 import green from "@material-ui/core/colors/green";
+import { blue } from "@material-ui/core/colors";
 
 const styles = theme => ({
   root: {},
   main: {
-    flexGrow: 1,
-    width: "auto",
+    // width: "auto",
     display: "block", // Fix IE 11 issue.
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
@@ -12,7 +12,8 @@ const styles = theme => ({
       width: 650,
       marginLeft: "auto",
       marginRight: "auto"
-    }
+    },
+    marginTop: theme.spacing.unit * 8
   },
   paper: {
     marginTop: theme.spacing.unit * 8,
@@ -27,7 +28,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    //width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing.unit
   },
   submit: {
@@ -64,7 +65,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2
   },
   buttonProgress: {
-    color: green[500],
+    color: blue[500],
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -85,6 +86,47 @@ const styles = theme => ({
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"
+  },
+  cardModeRoot: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden"
+  },
+  cardModeIcon: {
+    color: "rgba(255, 255, 255, 0.54)"
+  },
+  button: {
+    margin: 0
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit
+  },
+  iconSmall: {
+    fontSize: 20
+  },
+  demo: {
+    backgroundColor: theme.palette.background.paper
+  },
+  optionRoot: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  mediaEntryCard: {
+    maxWidth: 345
+  },
+  mediaEntryPic: {
+    height: 280
+  },
+  coverImg: {
+    display: "block",
+    maxWidth: "230px",
+    maxHeight: "95px",
+    width: "auto",
+    height: "auto"
   }
 });
 
