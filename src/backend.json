@@ -50,7 +50,7 @@
       "start date": "3 April 2016",
       "end date": "Present",
       "duration": "25min",
-      "episode": 63,
+      "episodes": 63,
       "genres": "Adventure, fantasy, superhero",
       "averageScore": 8,
       "coverImage": "https://img1.ak.crunchyroll.com/i/spire1/281089c6a9e64236a10e3b4232474e411532451975_full.jpg",
@@ -64,7 +64,7 @@
       "start date": "24 June 2015",
       "end date": "Present",
       "duration": "41min",
-      "episodes": "32",
+      "episodes": 32,
       "genres": "Drama, Techno thriller, Psychological thriller",
       "averageScore": 10,
       "coverImage": "http://www.gstatic.com/tv/thumb/tvbanners/14461667/p14461667_b_v8_aa.jpg",
@@ -97,70 +97,70 @@
       "userId": 1,
       "mediaId": 1,
       "reviewText": "Vivamus viverra luctus hendrerit. Curabitur eget sollicitudin tortor, sit amet.",
-      "Score": 10
+      "score": 10
     },
     {
       "id": 2,
       "userId": 3,
       "mediaId": 1,
       "reviewText": "Vivamus viverra luctus hendrerit. Curabitur eget sollicitudin tortor, sit amet.",
-      "Score": 7
+      "score": 7
     },
     {
       "id": 3,
       "userId": 2,
       "mediaId": 2,
       "reviewText": "Vestibulum a mauris porta, finibus justo sit amet, volutpat magna.",
-      "Score": 8
+      "score": 8
     },
     {
       "id": 4,
       "userId": 3,
       "mediaId": 2,
       "reviewText": "Duis at mauris purus. Aliquam tincidunt dui porttitor, ultrices erat eget, pulvinar elit. Nunc in velit in nisl tempor convallis non at nisl. Nulla lacinia, lorem in ornare imperdiet, orci.",
-      "Score": 1
+      "score": 1
     },
     {
       "id": 5,
       "userId": 1,
       "mediaId": 3,
       "reviewText": "Duis quam ex, imperdiet eu scelerisque eget, ullamcorper a nunc. Nulla semper eros in risus vulputate varius. Donec quam augue, vulputate ut tempor non, elementum ut felis. Vestibulum tincidunt nisl at viverra vehicula. Proin mattis vestibulum convallis. Aenean vehicula, nisl vitae consequat auctor, orci risus sollicitudin nisl, vel malesuada augue turpis a est. Aenean volutpat dignissim libero quis ullamcorper. Aenean.",
-      "Score": 7
+      "score": 7
     },
     {
       "id": 6,
       "userId": 3,
       "mediaId": 3,
       "reviewText": "Pellentesque ut elit non sem pellentesque hendrerit. Fusce in auctor.",
-      "Score": 10
+      "score": 10
     },
     {
       "id": 7,
       "userId": 2,
       "mediaId": 4,
       "reviewText": "In mollis urna eu ante efficitur mollis. Donec mi justo, malesuada in hendrerit interdum, commodo sed justo. Suspendisse lobortis rutrum.",
-      "Score": 10
+      "score": 10
     },
     {
       "id": 8,
       "userId": 1,
       "mediaId": 4,
       "reviewText": "Vestibulum commodo eros vitae leo ultricies scelerisque. Etiam a augue eu quam hendrerit cursus. Morbi mattis sollicitudin porttitor. Integer faucibus sit amet purus ac sodales. Sed nec laoreet elit. Nulla ac neque pretium, venenatis ex faucibus, semper velit. Nullam blandit magna interdum, congue odio non, dignissim velit. Aenean congue augue non sollicitudin pretium. Morbi dapibus dui vel mauris elementum, vitae vestibulum velit ornare. Sed at.",
-      "Score": 3
+      "score": 3
     }
   ],
   "lists": [
     {
       "id": 1,
-      "userid": 1
+      "userId": 1
     },
     {
       "id": 2,
-      "userid": 2
+      "userId": 2
     },
     {
       "id": 3,
-      "userid": 3
+      "userId": 3
     }
   ],
   "listEntries": [

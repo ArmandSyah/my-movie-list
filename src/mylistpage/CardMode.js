@@ -5,57 +5,54 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from "@material-ui/icons/Info";
 
+import { Delete, Edit } from "@material-ui/icons";
+
+import MyListEditListEntryModal from "./MyListEditListEntryModal";
 import styles from "../reusables/Styles";
-
-class Card extends GridListTile {
-  state = {
-    hover: false
-  };
-
-  handleOnMouseEnter = () => {
-    this.setState({ hover: true });
-  };
-
-  handleOnMouseLeave = () => {
-    this.setState({ hover: false });
-  };
-
-  render() {
-    const { tile, classes } = this.props;
-    return (
-      <div
-        onMouseEnter={this.handleOnMouseEnter}
-        onMouseLeave={this.handleOnMouseLeave}
-      >
-        <img src={tile.coverImage} alt={tile.title} />
-        <GridListTileBar
-          title={tile.title}
-          subtitle={
-            <span>
-              Score: {tile.score} - Progress: {tile.progress} - Type:
-              {tile.type} - Status: {tile.status}
-            </span>
-          }
-          actionIcon={
-            <div>
-              <IconButton className={classes.cardModeIcon}>
-                <InfoIcon />
-              </IconButton>
-            </div>
-          }
-        />
-      </div>
-    );
-  }
-}
-
-const MyListCard = withStyles(styles)(Card);
+import DeleteAlert from "../reusables/DeleteAlert";
 
 class CardMode extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deleteDialogOpen: false,
+      editListEntryModalOpen: false,
+      selectedListEntry: null
+    };
+  }
+
+  handleDeleteDialogOpen = selectedListEntry => () => {
+    this.setState({ deleteDialogOpen: true, selectedListEntry });
+  };
+
+  handleDeleteDialogClose = () => {
+    this.setState({ deleteDialogOpen: false, selectedListEntry: null });
+  };
+
+  handleYesActionForDelete = () => {
+    const { selectedListEntry } = this.state;
+    const { handleDeleteListEntry } = this.props;
+    const { id } = selectedListEntry;
+    this.setState({ deleteDialogOpen: false, selectedListEntry: null });
+    handleDeleteListEntry(id);
+  };
+
+  handleEditListEntryModalOpen = selectedListEntry => () => {
+    this.setState({ editListEntryModalOpen: true, selectedListEntry });
+  };
+
+  handleEditListEntryModalClose = () => {
+    this.setState({ editListEntryModalOpen: false, selectedListEntry: null });
+  };
+
   render() {
-    const { classes, listEntries, handleEnteringMediaEntry } = this.props;
+    const {
+      deleteDialogOpen,
+      editListEntryModalOpen,
+      selectedListEntry
+    } = this.state;
+    const { classes, listEntries, handleEditToListEntry } = this.props;
     return (
       <div className={classes.cardModeRoot}>
         <GridList cellHeight={180} spacing={15}>
@@ -65,15 +62,18 @@ class CardMode extends React.Component {
               <GridListTileBar
                 title={tile.title}
                 subtitle={
-                  <span>
-                    Score: {tile.score} - Progress: {tile.progress} - Type:
+                  <div>
+                    Score: {tile.score} - Progress: {tile.progress} - Type:{" "}
                     {tile.type} - Status: {tile.status}
-                  </span>
+                  </div>
                 }
                 actionIcon={
                   <div>
                     <IconButton className={classes.cardModeIcon}>
-                      <InfoIcon />
+                      <Delete onClick={this.handleDeleteDialogOpen(tile)} />
+                    </IconButton>
+                    <IconButton className={classes.cardModeIcon}>
+                      <Edit onClick={this.handleEditListEntryModalOpen(tile)} />
                     </IconButton>
                   </div>
                 }
@@ -81,6 +81,24 @@ class CardMode extends React.Component {
             </GridListTile>
           ))}
         </GridList>
+        {deleteDialogOpen && (
+          <DeleteAlert
+            open={deleteDialogOpen}
+            alertTitle={`Are you sure you wish to delete ${
+              selectedListEntry.title
+            }`}
+            handleClose={this.handleDeleteDialogClose}
+            handleYesAction={this.handleYesActionForDelete}
+          />
+        )}
+        {editListEntryModalOpen && (
+          <MyListEditListEntryModal
+            listEntry={selectedListEntry}
+            modalOpen={editListEntryModalOpen}
+            handleModalClose={this.handleEditListEntryModalClose}
+            handleEditToListEntry={handleEditToListEntry}
+          />
+        )}
       </div>
     );
   }

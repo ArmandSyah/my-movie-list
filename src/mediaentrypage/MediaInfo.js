@@ -12,18 +12,57 @@ import {
 } from "@material-ui/core";
 
 import styles from "../reusables/Styles";
-import ReusablePaper from "../reusables/ReusablePaper";
+
+import ReviewModal from "./ReviewModal";
+import AddToListModal from "./AddToListModal";
 
 class MediaInfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addListModalOpen: false,
+      reviewModalOpen: false
+    };
+  }
+
+  handleReviewModalOpen = () => {
+    this.setState({ reviewModalOpen: true });
+  };
+
+  handleReviewModalClose = () => {
+    this.setState({ reviewModalOpen: false });
+  };
+
+  handleAddListModalOpen = () => {
+    this.setState({ addListModalOpen: true });
+  };
+
+  handleAddListModalClose = () => {
+    this.setState({ addListModalOpen: false });
+  };
+
   render() {
-    const { reviews, users, mediaEntry, classes } = this.props;
+    const { reviewModalOpen, addListModalOpen } = this.state;
+    const {
+      reviews,
+      users,
+      mediaEntry,
+      handleAddReview,
+      handleAddToList
+    } = this.props;
     return (
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <Button variant="contained" style={{ marginBottom: "20px" }}>
+          <Button
+            variant="contained"
+            onClick={this.handleAddListModalOpen}
+            style={{ marginBottom: "20px" }}
+          >
             Add to List
           </Button>
-          <Button variant="contained">Write Review</Button>
+          <Button variant="contained" onClick={this.handleReviewModalOpen}>
+            Write Review
+          </Button>
         </div>
         <div
           style={{
@@ -58,7 +97,7 @@ class MediaInfo extends React.Component {
                       <ListItem>
                         <ListItemText
                           primary={`${user.username} - Score: ${
-                            review.Score
+                            review.score
                           }/10`}
                           secondary={`${review.reviewText}`}
                         />
@@ -116,6 +155,18 @@ class MediaInfo extends React.Component {
             </div>
           </Paper>
         </div>
+        <ReviewModal
+          handleModalClose={this.handleReviewModalClose}
+          modalOpen={reviewModalOpen}
+          mediaEntry={mediaEntry}
+          handleAddReview={handleAddReview}
+        />
+        <AddToListModal
+          handleModalClose={this.handleAddListModalClose}
+          modalOpen={addListModalOpen}
+          mediaEntry={mediaEntry}
+          handleAddToList={handleAddToList}
+        />
       </div>
     );
   }

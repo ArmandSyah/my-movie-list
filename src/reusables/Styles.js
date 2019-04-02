@@ -21,7 +21,8 @@ const styles = theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-      .spacing.unit * 3}px`
+      .spacing.unit * 3}px`,
+    backgroundColor: theme.palette.background.paper
   },
   avatar: {
     margin: theme.spacing.unit,
@@ -93,7 +94,7 @@ const styles = theme => ({
     overflow: "hidden"
   },
   cardModeIcon: {
-    color: "rgba(255, 255, 255, 0.54)"
+    color: theme.palette.primary.main
   },
   button: {
     margin: 0

@@ -53,14 +53,17 @@ class App extends Component {
   handleSignup = (email, username, password) => event => {
     const { backendData } = this.state;
     const randomUserId = Math.random() * (999999999 - 6) + 6;
+    const randomListId = Math.random() * (999999999 - 6) + 6;
     const userObject = { id: randomUserId, email, username, password };
-    const users = backendData.users;
+    const listObject = { id: randomListId, userId: randomUserId };
+    const { users, lists } = backendData;
     users.push(userObject);
+    lists.push(listObject);
 
     this.setState({
       currentPage: "home",
       loggedIn: true,
-      backendData: { ...backendData, users: users },
+      backendData: { ...backendData, users: users, lists: lists },
       currentUser: userObject
     });
 
@@ -91,6 +94,96 @@ class App extends Component {
       currentUserId: null,
       currentUser: null,
       currentPage: "home"
+    });
+  };
+
+  handleAddReview = (score, reviewText) => {
+    let { currentUserId, currentSelectedMediaId, backendData } = this.state;
+    const randomReviewId = Math.random() * (999999999 - 6) + 6;
+    const review = {
+      id: randomReviewId,
+      userId: currentUserId,
+      mediaId: currentSelectedMediaId,
+      reviewText,
+      score
+    };
+    const reviews = backendData.reviews;
+    reviews.push(review);
+    backendData = { reviews, ...backendData };
+    this.setState({ backendData });
+  };
+
+  handleAddToList = (status, score, progress) => {
+    let { currentUserId, currentSelectedMediaId, backendData } = this.state;
+    const randomListEntryId = Math.random() * (999999999 - 6) + 6;
+    const userList = backendData.lists.filter(
+      list => list.userId === currentUserId
+    )[0];
+    const listEntry = {
+      id: randomListEntryId,
+      listId: userList.id,
+      mediaId: currentSelectedMediaId,
+      progress: progress,
+      score: score,
+      status: status,
+      lastUpdated: new Date(Date.now()).toLocaleString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      })
+    };
+    const { listEntries } = backendData;
+    listEntries.push(listEntry);
+    backendData = { listEntries, ...backendData };
+    this.setState({
+      backendData,
+      currentUserListEntries: listEntries.filter(
+        listEntry => listEntry.listId === userList.id
+      )
+    });
+  };
+
+  handleDeleteListEntry = listEntryId => {
+    let { backendData, currentUserId } = this.state;
+    const { lists, listEntries } = backendData;
+
+    const userList = lists.filter(list => list.userId === currentUserId)[0];
+
+    const updatedListEntries = listEntries.filter(
+      listEntry => listEntry.id !== listEntryId
+    );
+
+    backendData = { ...backendData, listEntries: updatedListEntries };
+    this.setState({
+      backendData,
+      currentUserListEntries: updatedListEntries.filter(
+        listEntry => listEntry.listId === userList.id
+      )
+    });
+  };
+
+  handleEditToListEntry = (listEntryId, status, score, progress) => {
+    let { backendData, currentUserId } = this.state;
+    const { lists, listEntries } = backendData;
+
+    const userList = lists.filter(list => list.userId === currentUserId)[0];
+
+    const listEntryToUpdate = listEntries.filter(
+      listEntry => listEntry.id === listEntryId
+    )[0];
+
+    const updatedListEntry = { ...listEntryToUpdate, status, score, progress };
+    const findUpdateIndex = listEntries.findIndex(
+      listEntry => listEntry.id === listEntryId
+    );
+    listEntries[findUpdateIndex] = updatedListEntry;
+    backendData = { listEntries, ...backendData };
+
+    this.setState({
+      backendData,
+      currentUserListEntries: listEntries.filter(
+        listEntry => listEntry.listId === userList.id
+      )
     });
   };
 
@@ -127,6 +220,8 @@ class App extends Component {
           mediaId={currentSelectedMediaId}
           reviews={backendData.reviews}
           users={backendData.users}
+          handleAddReview={this.handleAddReview}
+          handleAddToList={this.handleAddToList}
         />
       ),
       myList: (
@@ -134,6 +229,8 @@ class App extends Component {
           currentUser={currentUser}
           listEntries={currentUserListEntries}
           media={backendData.media}
+          handleDeleteListEntry={this.handleDeleteListEntry}
+          handleEditToListEntry={this.handleEditToListEntry}
         />
       )
     };
@@ -147,7 +244,6 @@ class App extends Component {
             currentUser={currentUser}
           />
           {pages[this.state.currentPage]}
-          {/* {pages["mediaEntry"]} */}
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>
     );

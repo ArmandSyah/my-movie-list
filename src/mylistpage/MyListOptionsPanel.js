@@ -21,12 +21,18 @@ class MyListOptionsPanel extends React.Component {
           <Typography component="h3" variant="h5">
             Options
           </Typography>
-          <FormControl variant="filled" className={classes.formControl}>
+          <FormControl
+            variant="filled"
+            className={classes.formControl}
+            style={{ width: "180px" }}
+          >
             <InputLabel htmlFor="filled-age-simple">Display</InputLabel>
             <Select
               value={displayStatus}
               onChange={handleChange}
-              input={<FilledInput name="type" id="filled-age-simple" />}
+              input={
+                <FilledInput name="displayStatus" id="filled-age-simple" />
+              }
             >
               <MenuItem value="all">All</MenuItem>
               <MenuItem value="watching">Currently Watching</MenuItem>
@@ -35,7 +41,11 @@ class MyListOptionsPanel extends React.Component {
             </Select>
           </FormControl>
 
-          <FormControl variant="filled" className={classes.formControl}>
+          <FormControl
+            variant="filled"
+            className={classes.formControl}
+            style={{ width: "180px" }}
+          >
             <InputLabel htmlFor="filled-age-simple">Sort</InputLabel>
             <Select
               value={sort}

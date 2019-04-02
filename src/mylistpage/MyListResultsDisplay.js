@@ -9,6 +9,7 @@ import { mdiViewGrid, mdiViewList } from "@mdi/js";
 import styles from "../reusables/Styles";
 
 import CardMode from "./CardMode";
+import ListMode from "./ListMode";
 
 class MyListResultsDisplay extends React.Component {
   state = {
@@ -18,9 +19,16 @@ class MyListResultsDisplay extends React.Component {
   handleDisplayModeButton = mode => () => {
     this.setState({ displayMode: mode });
   };
+
   render() {
     const { displayMode } = this.state;
-    const { classes, listEntries } = this.props;
+    const {
+      classes,
+      listEntries,
+      handleDeleteListEntry,
+      handleEditToListEntry,
+      media
+    } = this.props;
     return (
       <div
         style={{ paddingTop: "25px", display: "flex", flexDirection: "column" }}
@@ -47,7 +55,20 @@ class MyListResultsDisplay extends React.Component {
             <Icon path={mdiViewList} size={1} />
           </Button>
         </div>
-        <CardMode listEntries={listEntries} />
+        {displayMode === "card" ? (
+          <CardMode
+            listEntries={listEntries}
+            handleDeleteListEntry={handleDeleteListEntry}
+            handleEditToListEntry={handleEditToListEntry}
+          />
+        ) : (
+          <ListMode
+            listEntries={listEntries}
+            handleDeleteListEntry={handleDeleteListEntry}
+            handleEditToListEntry={handleEditToListEntry}
+            media={media}
+          />
+        )}
       </div>
     );
   }

@@ -7,7 +7,14 @@ import MediaInfo from "./MediaInfo";
 
 class MediaEntryPage extends React.Component {
   render() {
-    const { mediaId, media, reviews, users } = this.props;
+    const {
+      mediaId,
+      media,
+      reviews,
+      users,
+      handleAddReview,
+      handleAddToList
+    } = this.props;
     const mediaEntry = media.filter(m => m.id === mediaId)[0];
     const { bannerImage, coverImage, title, description } = mediaEntry;
     const mediaReviews = reviews.filter(review => review.mediaId === mediaId);
@@ -33,6 +40,8 @@ class MediaEntryPage extends React.Component {
             reviews={mediaReviews}
             users={users}
             mediaEntry={mediaEntry}
+            handleAddReview={handleAddReview}
+            handleAddToList={handleAddToList}
           />
         </div>
       </div>
