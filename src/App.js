@@ -5,6 +5,7 @@ import SignupPage from "./signuppage/SignupPage";
 import LoginPage from "./loginpage/LoginPage";
 import BrowsePage from "./browsepage/BrowsePage";
 import MediaEntryPage from "./mediaentrypage/MediaEntryPage";
+import MyListPage from "./mylistpage/MyListPage";
 import "./App.css";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
@@ -126,6 +127,13 @@ class App extends Component {
           mediaId={currentSelectedMediaId}
           reviews={backendData.reviews}
           users={backendData.users}
+        />
+      ),
+      myList: (
+        <MyListPage
+          currentUser={currentUser}
+          listEntries={currentUserListEntries}
+          media={backendData.media}
         />
       )
     };

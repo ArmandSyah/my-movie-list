@@ -257,7 +257,7 @@ class SignupPage extends React.Component {
   }
 
   render() {
-    const { classes, handleSignup } = this.props;
+    const { classes } = this.props;
     const {
       username,
       email,

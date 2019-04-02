@@ -9,11 +9,11 @@ import {
   CssBaseline,
   CircularProgress
 } from "@material-ui/core";
-import { Search, CenterFocusStrong } from "@material-ui/icons";
+import { Search } from "@material-ui/icons";
 import styles from "../reusables/Styles";
 
-import ResultsDisplayer from "./ResultsDisplayer";
 import OptionsPanel from "./OptionsPanel";
+import ResultsDisplayer from "./ResultsDisplayer";
 
 class BrowsePage extends React.Component {
   constructor(props) {

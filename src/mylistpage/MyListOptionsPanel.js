@@ -1,5 +1,4 @@
 import React from "react";
-import ReusablePaper from "../reusables/ReusablePaper";
 import {
   Typography,
   InputLabel,
@@ -9,13 +8,13 @@ import {
   FilledInput
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import ReusablePaper from "../reusables/ReusablePaper";
 import styles from "../reusables/Styles";
 
-class OptionsPanel extends React.Component {
+class MyListOptionsPanel extends React.Component {
   render() {
-    const { handleChange, type, sort } = this.props;
+    const { handleChange, displayStatus, sort } = this.props;
     const { classes } = this.props;
-    console.log(type);
     return (
       <form className={classes.optionRoot}>
         <ReusablePaper>
@@ -23,15 +22,16 @@ class OptionsPanel extends React.Component {
             Options
           </Typography>
           <FormControl variant="filled" className={classes.formControl}>
-            <InputLabel htmlFor="filled-age-simple">Type</InputLabel>
+            <InputLabel htmlFor="filled-age-simple">Display</InputLabel>
             <Select
-              value={type}
+              value={displayStatus}
               onChange={handleChange}
               input={<FilledInput name="type" id="filled-age-simple" />}
             >
               <MenuItem value="all">All</MenuItem>
-              <MenuItem value="tv">TV</MenuItem>
-              <MenuItem value="movie">Movie</MenuItem>
+              <MenuItem value="watching">Currently Watching</MenuItem>
+              <MenuItem value="finished">Finished</MenuItem>
+              <MenuItem value="dropped">Dropped</MenuItem>
             </Select>
           </FormControl>
 
@@ -53,4 +53,4 @@ class OptionsPanel extends React.Component {
   }
 }
 
-export default withStyles(styles)(OptionsPanel);
+export default withStyles(styles)(MyListOptionsPanel);

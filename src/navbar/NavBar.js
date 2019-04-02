@@ -66,7 +66,7 @@ class NavBar extends React.Component {
       <div className={classes.sectionDesktop}>
         <Tooltip title="MyList">
           <IconButton
-            onClick={handleCurrentPageChange("mylist")}
+            onClick={handleCurrentPageChange("myList")}
             className={classes.navbarTooltip}
           >
             <ViewList style={{ paddingRight: "2px" }} />
@@ -110,7 +110,7 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const { classes, handleCurrentPageChange, isLoggedIn } = this.props;
+    const { handleCurrentPageChange, isLoggedIn } = this.props;
     return (
       <div>
         <AppBar position="static" color="primary">
@@ -124,7 +124,6 @@ class NavBar extends React.Component {
               </Typography>
             </Button>
 
-            {/* <div className={classes.grow} /> */}
             <div style={{ flexGrow: 1 }}>
               {isLoggedIn
                 ? this.renderTooltipsLoggedIn()

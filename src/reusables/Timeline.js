@@ -83,7 +83,6 @@ class Timeline extends React.Component {
   render() {
     const { classes, isLoggedIn } = this.props;
     const { records } = this.state;
-    console.log(records);
     return (
       <main className={classes.main}>
         <CssBaseline />
