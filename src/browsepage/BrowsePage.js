@@ -15,70 +15,80 @@ import styles from "../reusables/Styles";
 import OptionsPanel from "./OptionsPanel";
 import ResultsDisplayer from "./ResultsDisplayer";
 
+const filterResults = (results, type, sort) => {
+  let currentResults = results;
+  switch (type) {
+    case "TV":
+      currentResults = currentResults.filter(result => result.type === "TV");
+      break;
+    case "MOVIE":
+      currentResults = currentResults.filter(result => result.type === "MOVIE");
+      break;
+    case "all":
+    default:
+      break;
+  }
+
+  switch (sort) {
+    case "name":
+      currentResults.sort((a, b) => {
+        const aTitle = a.title.toLowerCase();
+        const bTitle = b.title.toLowerCase();
+
+        return bTitle > aTitle ? -1 : aTitle > bTitle ? 1 : 0;
+      });
+      break;
+    case "date":
+      currentResults.sort((a, b) => {
+        const aDate = a["start date"];
+        const bDate = b["start date"];
+
+        return new Date(aDate) - new Date(bDate);
+      });
+      break;
+    case "score":
+      currentResults.sort((a, b) => {
+        const aScore = a.averageScore;
+        const bScore = b.averageScore;
+
+        return bScore - aScore;
+      });
+      break;
+    default:
+      break;
+  }
+  return currentResults;
+};
+
 class BrowsePage extends React.Component {
   constructor(props) {
     super(props);
-    const { customBackendData } = this.props;
+    const { customBackendData, currentSearchText } = this.props;
+    const { media } = customBackendData;
+
+    const type = "all";
+    const sort = "name";
+
+    const searchResults =
+      currentSearchText === ""
+        ? []
+        : customBackendData.media.filter(m =>
+            m.title.toLowerCase().includes(currentSearchText.toLowerCase())
+          );
+    const displayedResults =
+      currentSearchText === "" ? [] : filterResults(searchResults, type, sort);
     this.state = {
-      searchValue: "",
+      searchValue: currentSearchText,
       searchEmpty: false,
       loading: false,
       success: false,
       open: false,
-      media: customBackendData.media,
-      searchResults: [],
-      displayedResults: [],
-      type: "all",
-      sort: "name"
+      media,
+      searchResults,
+      displayedResults,
+      type,
+      sort
     };
-  }
-
-  filterResults(results) {
-    const { type, sort } = this.state;
-    let currentResults = results;
-    switch (type) {
-      case "TV":
-        currentResults = currentResults.filter(result => result.type === "TV");
-        break;
-      case "MOVIE":
-        currentResults = currentResults.filter(
-          result => result.type === "MOVIE"
-        );
-        break;
-      case "all":
-      default:
-        break;
-    }
-
-    switch (sort) {
-      case "name":
-        currentResults.sort((a, b) => {
-          const aTitle = a.title.toLowerCase();
-          const bTitle = b.title.toLowerCase();
-
-          return bTitle > aTitle ? -1 : aTitle > bTitle ? 1 : 0;
-        });
-        break;
-      case "date":
-        currentResults.sort((a, b) => {
-          const aDate = a["start date"];
-          const bDate = b["start date"];
-
-          return new Date(aDate) - new Date(bDate);
-        });
-        break;
-      case "score":
-        currentResults.sort((a, b) => {
-          const aScore = a.averageScore;
-          const bScore = b.averageScore;
-
-          return bScore - aScore;
-        });
-        break;
-      default:
-        break;
-    }
-    return currentResults;
   }
 
   componentWillUnmount() {
@@ -93,7 +103,11 @@ class BrowsePage extends React.Component {
       return;
     }
 
-    this.setState({ searchResults: [], searchClicked: false });
+    this.setState({
+      searchResults: [],
+      displayedResults: [],
+      searchClicked: false
+    });
 
     if (!this.state.loading) {
       this.setState(
@@ -112,7 +126,11 @@ class BrowsePage extends React.Component {
               success: true,
               open: true,
               searchResults,
-              displayedResults: this.filterResults(searchResults)
+              displayedResults: filterResults(
+                searchResults,
+                this.state.type,
+                this.state.sort
+              )
             });
           }, 1500);
         }
@@ -137,7 +155,13 @@ class BrowsePage extends React.Component {
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value }, () => {
       const { searchResults } = this.state;
-      this.setState({ displayedResults: this.filterResults(searchResults) });
+      this.setState({
+        displayedResults: filterResults(
+          searchResults,
+          this.state.type,
+          this.state.sort
+        )
+      });
     });
   };
 

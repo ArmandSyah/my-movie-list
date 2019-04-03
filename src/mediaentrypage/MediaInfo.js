@@ -16,12 +16,19 @@ import styles from "../reusables/Styles";
 import ReviewModal from "./ReviewModal";
 import AddToListModal from "./AddToListModal";
 
+import MMLSnackbar from "../snackbar/MMLSnackbar";
+
 class MediaInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       addListModalOpen: false,
-      reviewModalOpen: false
+      reviewModalOpen: false,
+      addedToListSuccess: false,
+      addedReviewSuccess: false,
+      editListEntrySuccess: false,
+      editReviewSuccess: false,
+      openSnackbar: false
     };
   }
 
@@ -86,6 +93,36 @@ class MediaInfo extends React.Component {
 
   handleAddListModalClose = () => {
     this.setState({ addListModalOpen: false });
+  };
+
+  handleAddToListSuccess = () => {
+    this.setState({ addedToListSuccess: true, openSnackbar: true });
+  };
+
+  handledAddReviewSuccess = () => {
+    this.setState({ addedReviewSuccess: true, openSnackbar: true });
+  };
+
+  handleEditListEntrySuccess = () => {
+    this.setState({ editListEntrySuccess: true, openSnackbar: true });
+  };
+
+  handleEditReviewSuccess = () => {
+    this.setState({ editReviewSuccess: true, openSnackbar: true });
+  };
+
+  handleClose = reason => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({
+      addedToListSuccess: false,
+      addedReviewSuccess: false,
+      editListEntrySuccess: false,
+      editReviewSuccess: false,
+      openSnackbar: false
+    });
   };
 
   renderButtons() {
@@ -156,7 +193,12 @@ class MediaInfo extends React.Component {
       reviewedByUser,
       reviewScore,
       reviewText,
-      reviewId
+      reviewId,
+      addedToListSuccess,
+      addedReviewSuccess,
+      editListEntrySuccess,
+      editReviewSuccess,
+      openSnackbar
     } = this.state;
     const {
       reviews,
@@ -277,6 +319,8 @@ class MediaInfo extends React.Component {
           reviewScore={reviewScore}
           reviewText={reviewText}
           reviewId={reviewId}
+          handledAddReviewSuccess={this.handledAddReviewSuccess}
+          handleEditReviewSuccess={this.handleEditReviewSuccess}
         />
         <AddToListModal
           handleEditToListEntry={handleEditToListEntry}
@@ -289,7 +333,35 @@ class MediaInfo extends React.Component {
           score={score}
           progress={progress}
           listEntryId={listEntryId}
+          handleAddToListSuccess={this.handleAddToListSuccess}
+          handleEditListEntrySuccess={this.handleEditListEntrySuccess}
         />
+        {(addedToListSuccess || editListEntrySuccess) && (
+          <MMLSnackbar
+            open={openSnackbar}
+            hideDuration={2500}
+            handleClose={this.handleClose}
+            variant={"success"}
+            message={
+              addedToListSuccess
+                ? `${mediaEntry.title} has been added to your list`
+                : editListEntrySuccess && `${mediaEntry.title} has been edited`
+            }
+          />
+        )}
+        {(addedReviewSuccess || editReviewSuccess) && (
+          <MMLSnackbar
+            open={openSnackbar}
+            hideDuration={2500}
+            handleClose={this.handleClose}
+            variant={"success"}
+            message={
+              addedReviewSuccess
+                ? `Review added for ${mediaEntry.title}`
+                : editReviewSuccess && `Review edited for ${mediaEntry.title}`
+            }
+          />
+        )}
       </div>
     );
   }

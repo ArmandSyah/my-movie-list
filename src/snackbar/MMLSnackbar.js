@@ -16,7 +16,7 @@ class MMLSnackbar extends React.Component {
         onClose={handleClose}
       >
         <MySnackbarContent
-          onClose={this.handleClose}
+          onClose={handleClose}
           variant={variant}
           message={message}
         />

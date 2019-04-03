@@ -35,13 +35,17 @@ class ModalContent extends React.Component {
       handleAddToList,
       handleEditToListEntry,
       handleModalClose,
+      handleAddToListSuccess,
       inUsersList,
-      listEntryId
+      listEntryId,
+      handleEditListEntrySuccess
     } = this.props;
     if (inUsersList) {
       handleEditToListEntry(listEntryId, status, score, progress);
+      handleEditListEntrySuccess();
     } else {
       handleAddToList(status, score, progress);
+      handleAddToListSuccess();
     }
     handleModalClose();
   };
@@ -197,9 +201,11 @@ class AddToListModal extends React.Component {
       progress,
       inUsersList,
       handleEditToListEntry,
-      listEntryId
+      listEntryId,
+      handleAddToListSuccess,
+      handleEditListEntrySuccess
     } = this.props;
-    const { id, coverImage, bannerImage, title, episodes } = mediaEntry;
+    const { coverImage, bannerImage, title, episodes } = mediaEntry;
     return (
       <MMLModal
         modalOpen={modalOpen}
@@ -219,6 +225,8 @@ class AddToListModal extends React.Component {
           inUsersList={inUsersList}
           handleEditToListEntry={handleEditToListEntry}
           listEntryId={listEntryId}
+          handleAddToListSuccess={handleAddToListSuccess}
+          handleEditListEntrySuccess={handleEditListEntrySuccess}
         />
       </MMLModal>
     );

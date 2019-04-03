@@ -1,13 +1,16 @@
 import React from "react";
 
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, withStyles } from "@material-ui/core";
 
 import MediaBannerTop from "./MediaBannerTop";
 import MediaInfo from "./MediaInfo";
 
+import styles from "../reusables/Styles";
+
 class MediaEntryPage extends React.Component {
   render() {
     const {
+      classes,
       mediaId,
       media,
       reviews,
@@ -25,7 +28,13 @@ class MediaEntryPage extends React.Component {
     const { bannerImage, coverImage, title, description } = mediaEntry;
     const mediaReviews = reviews.filter(review => review.mediaId === mediaId);
     return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center"
+        }}
+      >
         <CssBaseline />
         <div style={{ flexGrow: 1 }}>
           <MediaBannerTop
@@ -38,9 +47,9 @@ class MediaEntryPage extends React.Component {
         <div
           style={{
             flexGrow: 3,
-            paddingTop: "20px",
-            paddingLeft: "10%"
+            paddingTop: "20px"
           }}
+          className={classes.mediaInfoDiv}
         >
           <MediaInfo
             reviews={mediaReviews}
@@ -62,4 +71,4 @@ class MediaEntryPage extends React.Component {
   }
 }
 
-export default MediaEntryPage;
+export default withStyles(styles)(MediaEntryPage);

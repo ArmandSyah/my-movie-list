@@ -3,14 +3,7 @@ import React from "react";
 import Icon from "@mdi/react";
 import { mdiClose } from "@mdi/js";
 
-import {
-  Modal,
-  Slide,
-  withStyles,
-  Typography,
-  Paper,
-  IconButton
-} from "@material-ui/core";
+import { Modal, Slide, withStyles, Paper, IconButton } from "@material-ui/core";
 import styles from "../reusables/Styles";
 
 function getModalStyle() {
@@ -26,13 +19,7 @@ function getModalStyle() {
 
 class MMLModal extends React.Component {
   render() {
-    const {
-      modalOpen,
-      handleModalClose,
-      classes,
-      title,
-      children
-    } = this.props;
+    const { modalOpen, handleModalClose, classes, children } = this.props;
     console.log(modalOpen);
     return (
       <Modal

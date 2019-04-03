@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  Slide
-} from "@material-ui/core";
+import { Button, Dialog, DialogTitle, DialogActions } from "@material-ui/core";
 
 class DeleteAlert extends React.Component {
   render() {

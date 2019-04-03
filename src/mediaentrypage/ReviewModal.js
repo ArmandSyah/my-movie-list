@@ -39,13 +39,17 @@ class ModalContent extends React.Component {
       handleAddReview,
       handleModalClose,
       handleEditToReview,
+      handledAddReviewSuccess,
+      handleEditReviewSuccess,
       reviewedByUser,
       reviewId
     } = this.props;
     if (reviewedByUser) {
       handleEditToReview(reviewId, reviewText, score);
+      handleEditReviewSuccess();
     } else {
       handleAddReview(score, reviewText);
+      handledAddReviewSuccess();
     }
     handleModalClose();
   };
@@ -176,9 +180,11 @@ class ReviewModal extends React.Component {
       reviewedByUser,
       reviewScore,
       reviewText,
-      reviewId
+      reviewId,
+      handledAddReviewSuccess,
+      handleEditReviewSuccess
     } = this.props;
-    const { id, coverImage, bannerImage, title } = mediaEntry;
+    const { coverImage, bannerImage, title } = mediaEntry;
     return (
       <MMLModal
         modalOpen={modalOpen}
@@ -196,6 +202,8 @@ class ReviewModal extends React.Component {
           reviewScore={reviewScore}
           reviewText={reviewText}
           reviewId={reviewId}
+          handledAddReviewSuccess={handledAddReviewSuccess}
+          handleEditReviewSuccess={handleEditReviewSuccess}
         />
       </MMLModal>
     );

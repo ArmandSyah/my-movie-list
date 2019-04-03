@@ -22,7 +22,8 @@ const setupFusedEntries = (listEntries, media) => {
       lastUpdated,
       realScore: score,
       realProgress: progress,
-      totalEpisodes: episodes
+      totalEpisodes: episodes,
+      mediaId
     };
   });
   return fusedListEntries;
@@ -124,6 +125,7 @@ class MyListPage extends React.Component {
       currentUser,
       handleDeleteListEntry,
       handleEditToListEntry,
+      handleEnteringMediaEntry,
       media
     } = this.props;
     return (
@@ -154,6 +156,7 @@ class MyListPage extends React.Component {
                 media={media}
                 handleDeleteListEntry={handleDeleteListEntry}
                 handleEditToListEntry={handleEditToListEntry}
+                handleEnteringMediaEntry={handleEnteringMediaEntry}
               />
             </form>
           </div>

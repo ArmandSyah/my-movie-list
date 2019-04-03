@@ -18,12 +18,18 @@ import DeleteAlert from "../reusables/DeleteAlert";
 
 import styles from "../reusables/Styles";
 
+import MMLSnackbar from "../snackbar/MMLSnackbar";
+
 class ListRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       deleteDialogOpen: false,
-      editListEntryModalOpen: false
+      editListEntryModalOpen: false,
+      deleteFromListSuccess: false,
+      editListEntrySuccess: false,
+      openSnackbar: false,
+      hover: false
     };
   }
 
@@ -38,7 +44,11 @@ class ListRow extends React.Component {
   handleYesActionForDelete = () => {
     const { handleDeleteListEntry, listEntry } = this.props;
     const { id } = listEntry;
-    this.setState({ deleteDialogOpen: false });
+    this.setState({
+      deleteDialogOpen: false,
+      deleteFromListSuccess: true,
+      openSnackbar: true
+    });
     handleDeleteListEntry(id);
   };
 
@@ -48,6 +58,30 @@ class ListRow extends React.Component {
 
   handleEditListEntryModalClose = () => {
     this.setState({ editListEntryModalOpen: false });
+  };
+
+  handleEditListEntrySuccess = () => {
+    this.setState({ editListEntrySuccess: true, openSnackbar: true });
+  };
+
+  handleClose = reason => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({
+      deleteFromListSuccess: false,
+      editListEntrySuccess: false,
+      openSnackbar: false
+    });
+  };
+
+  handleMouseOver = () => {
+    this.setState({ hover: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ hover: false });
   };
 
   renderActionButtons() {
@@ -65,8 +99,19 @@ class ListRow extends React.Component {
   }
 
   render() {
-    const { deleteDialogOpen, editListEntryModalOpen } = this.state;
-    const { listEntry, handleEditToListEntry } = this.props;
+    const {
+      deleteDialogOpen,
+      editListEntryModalOpen,
+      deleteFromListSuccess,
+      editListEntrySuccess,
+      openSnackbar,
+      hover
+    } = this.state;
+    const {
+      listEntry,
+      handleEditToListEntry,
+      handleEnteringMediaEntry
+    } = this.props;
     return (
       <TableRow key={listEntry.title}>
         <TableCell>
@@ -76,7 +121,16 @@ class ListRow extends React.Component {
             style={{ width: "58px", height: "37px" }}
           />
         </TableCell>
-        <TableCell>{listEntry.title}</TableCell>
+        <TableCell>
+          <div
+            onMouseEnter={this.handleMouseOver}
+            onMouseLeave={this.handleMouseLeave}
+            onClick={handleEnteringMediaEntry(listEntry.mediaId)}
+            style={{ cursor: "pointer", color: hover ? "#7d80d1" : "inherit" }}
+          >
+            {listEntry.title}
+          </div>
+        </TableCell>
         <TableCell>{listEntry.score}</TableCell>
         <TableCell>{listEntry.progress}</TableCell>
         <TableCell>{listEntry.type}</TableCell>
@@ -94,7 +148,26 @@ class ListRow extends React.Component {
           modalOpen={editListEntryModalOpen}
           handleModalClose={this.handleEditListEntryModalClose}
           handleEditToListEntry={handleEditToListEntry}
+          handleEditListEntrySuccess={this.handleEditListEntrySuccess}
         />
+        {deleteFromListSuccess && (
+          <MMLSnackbar
+            open={openSnackbar}
+            hideDuration={2500}
+            handleClose={this.handleClose}
+            variant={"success"}
+            message={"Entry has been deleted"}
+          />
+        )}
+        {editListEntrySuccess && (
+          <MMLSnackbar
+            open={openSnackbar}
+            hideDuration={2500}
+            handleClose={this.handleClose}
+            variant={"success"}
+            message={"Entry has been editted"}
+          />
+        )}
       </TableRow>
     );
   }
@@ -125,6 +198,7 @@ class ListMode extends React.Component {
       listEntries,
       handleDeleteListEntry,
       handleEditToListEntry,
+      handleEnteringMediaEntry,
       media
     } = this.props;
     return (
@@ -134,6 +208,7 @@ class ListMode extends React.Component {
             listEntry={listEntry}
             handleDeleteListEntry={handleDeleteListEntry}
             handleEditToListEntry={handleEditToListEntry}
+            handleEnteringMediaEntry={handleEnteringMediaEntry}
             media={media}
           />
         ))}

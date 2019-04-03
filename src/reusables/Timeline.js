@@ -134,7 +134,6 @@ class Timeline extends React.Component {
 
   render() {
     const { classes, isLoggedIn, handleCurrentPageChange } = this.props;
-    const { records } = this.state;
     return (
       <main className={classes.main}>
         <CssBaseline />

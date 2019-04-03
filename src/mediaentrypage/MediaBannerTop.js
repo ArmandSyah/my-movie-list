@@ -1,16 +1,21 @@
 import React from "react";
 
-import { Typography, Card, CardMedia, withStyles } from "@material-ui/core";
+import { Typography, withStyles } from "@material-ui/core";
 
-import ReusablePaper from "../reusables/ReusablePaper";
 import styles from "../reusables/Styles";
 
 class MediaBannerTop extends React.Component {
   render() {
-    const { banner, cover, title, description, classes } = this.props;
+    const { banner, cover, title, description } = this.props;
     console.log(cover);
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center"
+        }}
+      >
         <div
           style={{
             backgroundImage: `url(${banner})`,
@@ -26,13 +31,12 @@ class MediaBannerTop extends React.Component {
         <div
           style={{
             display: "flex",
-            flexDirection: "row",
             width: "50%",
             height: "auto",
-            margin: "0 auto",
             position: "relative",
             zIndex: 2,
-            paddingTop: "10%"
+            paddingTop: "10%",
+            alignSelf: "center"
           }}
         >
           <img

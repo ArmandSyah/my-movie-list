@@ -1,4 +1,3 @@
-import green from "@material-ui/core/colors/green";
 import { blue } from "@material-ui/core/colors";
 
 const styles = theme => ({
@@ -130,6 +129,23 @@ const styles = theme => ({
   },
   navbarTooltip: {
     borderRadius: "0px"
+  },
+  mediaInfoDiv: {
+    flexGrow: 3,
+    paddingTop: "20px",
+    [theme.breakpoints.up("lg")]: {
+      paddingLeft: "10%",
+      paddingRight: "0%"
+    },
+    [theme.breakpoints.up("xl")]: {
+      paddingLeft: "0%",
+      paddingRight: "2%"
+    }
+  },
+  cardNoHover: {},
+  cardHover: {
+    color: theme.palette.primary.main,
+    cursor: "pointer"
   }
 });
 

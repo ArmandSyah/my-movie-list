@@ -14,6 +14,12 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import customBackendData from "./backend.json";
 
 const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      lg: 1920,
+      xl: 2560
+    }
+  },
   palette: {
     primary: {
       main: "#7d80d1"
@@ -35,18 +41,24 @@ class App extends Component {
       backendData: customBackendData,
       currentSelectedMediaId: 4,
       currentUser: null,
-      currentUserListEntries: []
+      currentUserListEntries: [],
+      currentSearchText: ""
     };
   }
 
+  handleSearchFromNavbar = query => () => {
+    this.setState({ currentPage: "browse", currentSearchText: query });
+  };
+
   handleCurrentPageChange = pageName => () => {
-    this.setState({ currentPage: pageName });
+    this.setState({ currentPage: pageName, currentSearchText: "" });
   };
 
   handleEnteringMediaEntry = mediaEntryId => () => {
     this.setState({
       currentSelectedMediaId: mediaEntryId,
-      currentPage: "mediaEntry"
+      currentPage: "mediaEntry",
+      currentSearchText: ""
     });
   };
 
@@ -83,7 +95,8 @@ class App extends Component {
       currentUserId: userId,
       currentPage: "home",
       currentUser: foundUser,
-      currentUserListEntries: userListEntries
+      currentUserListEntries: userListEntries,
+      currentSearchText: ""
     });
     event.preventDefault();
   };
@@ -93,7 +106,8 @@ class App extends Component {
       loggedIn: false,
       currentUserId: null,
       currentUser: null,
-      currentPage: "home"
+      currentPage: "home",
+      currentSearchText: ""
     });
   };
 
@@ -207,7 +221,8 @@ class App extends Component {
       loggedIn,
       currentUser,
       currentUserId,
-      currentUserListEntries
+      currentUserListEntries,
+      currentSearchText
     } = this.state;
     const pages = {
       home: (
@@ -227,6 +242,7 @@ class App extends Component {
         <BrowsePage
           customBackendData={backendData}
           handleEnteringMediaEntry={this.handleEnteringMediaEntry}
+          currentSearchText={currentSearchText}
         />
       ),
       mediaEntry: (
@@ -252,6 +268,7 @@ class App extends Component {
           media={backendData.media}
           handleDeleteListEntry={this.handleDeleteListEntry}
           handleEditToListEntry={this.handleEditToListEntry}
+          handleEnteringMediaEntry={this.handleEnteringMediaEntry}
         />
       )
     };
@@ -263,6 +280,7 @@ class App extends Component {
             handleLogout={this.handleLogout}
             isLoggedIn={loggedIn}
             currentUser={currentUser}
+            handleSearchFromNavbar={this.handleSearchFromNavbar}
           />
           {pages[this.state.currentPage]}
         </MuiThemeProvider>

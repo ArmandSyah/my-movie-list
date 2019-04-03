@@ -5,12 +5,13 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Button from "@material-ui/core/Button";
+import { TextField, InputAdornment, Menu, MenuItem } from "@material-ui/core";
 import {
   Search,
   PersonAdd,
   ExitToApp,
   ViewList,
-  PowerSettingsNew
+  AccountCircle
 } from "@material-ui/icons";
 
 import IconButton from "@material-ui/core/IconButton";
@@ -18,8 +19,42 @@ import IconButton from "@material-ui/core/IconButton";
 import styles from "../reusables/Styles";
 
 class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchValue: "",
+      anchorEl: null
+    };
+  }
+
+  handleProfileIconClick = event => {
+    console.log("Profile cliock");
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleLogoutAction = () => {
+    const { handleLogout } = this.props;
+    handleLogout();
+    this.handleClose();
+  };
+
+  handleSearchOnChange = event => {
+    this.setState({
+      searchValue: event.target.value
+    });
+  };
+
   renderTooltipsNotLoggedIn() {
-    const { classes, handleCurrentPageChange } = this.props;
+    const { searchValue } = this.state;
+    const {
+      classes,
+      handleCurrentPageChange,
+      handleSearchFromNavbar
+    } = this.props;
     return (
       <div className={classes.sectionDesktop}>
         <Tooltip title="Browse">
@@ -46,21 +81,55 @@ class NavBar extends React.Component {
           <IconButton
             onClick={handleCurrentPageChange("signup")}
             className={classes.navbarTooltip}
+            style={{ borderRadius: "0px", borderRight: "0.1em solid black" }}
           >
             <PersonAdd style={{ paddingRight: "2px" }} />
             Sign up
           </IconButton>
         </Tooltip>
+
+        <div
+          style={{
+            alignSelf: "center",
+            flex: 1,
+            display: "flex",
+            justifyItems: "center"
+          }}
+        >
+          <TextField
+            id="search-field"
+            variant="filled"
+            label="Search"
+            type="text"
+            value={searchValue}
+            onChange={this.handleSearchOnChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleSearchFromNavbar(searchValue)}>
+                    <Search />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            style={{
+              paddingLeft: "10px",
+              paddingTop: "10px",
+              paddingBottom: "10px"
+            }}
+          />
+        </div>
       </div>
     );
   }
 
   renderTooltipsLoggedIn() {
+    const { searchValue, anchorEl } = this.state;
     const {
       classes,
       handleCurrentPageChange,
-      handleLogout,
-      currentUser
+      currentUser,
+      handleSearchFromNavbar
     } = this.props;
     return (
       <div className={classes.sectionDesktop}>
@@ -85,6 +154,38 @@ class NavBar extends React.Component {
 
         <div
           style={{
+            alignSelf: "center",
+            flex: 1,
+            display: "flex",
+            justifyItems: "center"
+          }}
+        >
+          <TextField
+            id="search-field"
+            variant="filled"
+            label="Search"
+            type="text"
+            value={searchValue}
+            onChange={this.handleSearchOnChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleSearchFromNavbar(searchValue)}>
+                    <Search />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            style={{
+              paddingLeft: "10px",
+              paddingTop: "10px",
+              paddingBottom: "10px"
+            }}
+          />
+        </div>
+
+        <div
+          style={{
             display: "flex",
             flexDirection: "row",
             flexGrow: 1,
@@ -93,17 +194,22 @@ class NavBar extends React.Component {
           }}
         >
           <Typography variant="title">
-            Hello, {`${currentUser.username}:`}
+            Hello, {`${currentUser.username}`}
           </Typography>
-          <Tooltip title="Log out">
-            <IconButton
-              onClick={handleLogout}
-              className={classes.navbarTooltip}
-            >
-              <PowerSettingsNew style={{ paddingRight: "2px" }} />
-              Log out
-            </IconButton>
-          </Tooltip>
+          <IconButton
+            onClick={this.handleProfileIconClick}
+            className={classes.navbarTooltip}
+          >
+            <AccountCircle style={{ paddingRight: "2px" }} />
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={this.handleClose}
+          >
+            <MenuItem onClick={this.handleLogoutAction}>Log Out</MenuItem>
+          </Menu>
         </div>
       </div>
     );

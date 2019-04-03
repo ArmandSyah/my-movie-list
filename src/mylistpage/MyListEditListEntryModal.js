@@ -31,8 +31,14 @@ class ModalContent extends React.Component {
 
   handleModalUpdate = () => {
     const { status, score, progress } = this.state;
-    const { handleEditToListEntry, handleModalClose, listEntryId } = this.props;
+    const {
+      handleEditToListEntry,
+      handleModalClose,
+      listEntryId,
+      handleEditListEntrySuccess
+    } = this.props;
     handleEditToListEntry(listEntryId, status, score, progress);
+    handleEditListEntrySuccess();
     handleModalClose();
   };
 
@@ -181,7 +187,8 @@ class MyListEditListEntryModal extends React.Component {
       listEntry,
       modalOpen,
       handleModalClose,
-      handleEditToListEntry
+      handleEditToListEntry,
+      handleEditListEntrySuccess
     } = this.props;
     const {
       id,
@@ -208,6 +215,7 @@ class MyListEditListEntryModal extends React.Component {
           score={realScore}
           progress={realProgress}
           listEntryId={id}
+          handleEditListEntrySuccess={handleEditListEntrySuccess}
         />
       </MMLModal>
     );

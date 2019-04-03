@@ -27,6 +27,7 @@ class MyListResultsDisplay extends React.Component {
       listEntries,
       handleDeleteListEntry,
       handleEditToListEntry,
+      handleEnteringMediaEntry,
       media
     } = this.props;
     return (
@@ -60,12 +61,14 @@ class MyListResultsDisplay extends React.Component {
             listEntries={listEntries}
             handleDeleteListEntry={handleDeleteListEntry}
             handleEditToListEntry={handleEditToListEntry}
+            handleEnteringMediaEntry={handleEnteringMediaEntry}
           />
         ) : (
           <ListMode
             listEntries={listEntries}
             handleDeleteListEntry={handleDeleteListEntry}
             handleEditToListEntry={handleEditToListEntry}
+            handleEnteringMediaEntry={handleEnteringMediaEntry}
             media={media}
           />
         )}
