@@ -186,7 +186,17 @@ class App extends Component {
       listEntry => listEntry.id === listEntryId
     )[0];
 
-    const updatedListEntry = { ...listEntryToUpdate, status, score, progress };
+    const updatedListEntry = {
+      ...listEntryToUpdate,
+      status,
+      score,
+      progress,
+      lastUpdated: new Date(Date.now()).toLocaleString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      })
+    };
     const findUpdateIndex = listEntries.findIndex(
       listEntry => listEntry.id === listEntryId
     );
@@ -212,6 +222,12 @@ class App extends Component {
     reviews[findUpdateIndex] = updatedReview;
     backendData = { ...backendData, reviews };
     this.setState({ backendData });
+  };
+
+  handleEnteringSearchText = event => {
+    this.setState({
+      currentSearchText: event.target.value
+    });
   };
 
   render() {
@@ -280,7 +296,9 @@ class App extends Component {
             handleLogout={this.handleLogout}
             isLoggedIn={loggedIn}
             currentUser={currentUser}
+            handleEnteringSearchText={this.handleEnteringSearchText}
             handleSearchFromNavbar={this.handleSearchFromNavbar}
+            currentSearchText={currentSearchText}
           />
           {pages[this.state.currentPage]}
         </MuiThemeProvider>

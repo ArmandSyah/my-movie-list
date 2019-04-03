@@ -128,7 +128,9 @@ const styles = theme => ({
     height: "auto"
   },
   navbarTooltip: {
-    borderRadius: "0px"
+    borderRadius: "0px",
+    width: "132px",
+    height: "52px"
   },
   mediaInfoDiv: {
     flexGrow: 3,

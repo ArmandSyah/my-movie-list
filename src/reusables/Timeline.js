@@ -55,14 +55,14 @@ class LogoutPreview extends React.Component {
         <Button
           variant="contained"
           onClick={handleCurrentPageChange("login")}
-          style={{ marginBottom: "20px", flex: "1 1 0" }}
+          style={{ marginBottom: "20px", flex: "1 1 0", minWidth: "250px" }}
         >
           Log in
         </Button>
         <Button
           variant="contained"
           onClick={handleCurrentPageChange("signup")}
-          style={{ marginBottom: "20px", flex: "1 1 0" }}
+          style={{ marginBottom: "20px", flex: "1 1 0", minWidth: "250px" }}
         >
           Sign up
         </Button>
@@ -81,15 +81,14 @@ class Timeline extends React.Component {
 
   componentDidMount() {
     const { currentUserListEntries, media } = this.props;
-    const entriesToShow = currentUserListEntries.slice(0, 3);
-    entriesToShow.sort((a, b) => {
+    currentUserListEntries.sort((a, b) => {
       const aDate = a["lastUpdated"];
       const bDate = b["lastUpdated"];
 
       return new Date(bDate) - new Date(aDate);
     });
     this.setState({
-      records: entriesToShow.map(entry => (
+      records: currentUserListEntries.map(entry => (
         <ActivityRecord entry={entry} media={media} />
       ))
     });
@@ -121,7 +120,7 @@ class Timeline extends React.Component {
           <Button
             variant="contained"
             onClick={handleCurrentPageChange("browse")}
-            style={{ marginBottom: "20px", flex: "1 1 0" }}
+            style={{ marginBottom: "20px", flex: "1 1 0", minWidth: "250px" }}
           >
             Browse
           </Button>

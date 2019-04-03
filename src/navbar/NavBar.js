@@ -21,10 +21,16 @@ import styles from "../reusables/Styles";
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
+    const { currentSearchText } = this.props;
     this.state = {
-      searchValue: "",
+      searchValue: currentSearchText,
       anchorEl: null
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const { currentSearchText } = props;
+    return { searchValue: currentSearchText };
   }
 
   handleProfileIconClick = event => {
@@ -53,7 +59,8 @@ class NavBar extends React.Component {
     const {
       classes,
       handleCurrentPageChange,
-      handleSearchFromNavbar
+      handleSearchFromNavbar,
+      handleEnteringSearchText
     } = this.props;
     return (
       <div className={classes.sectionDesktop}>
@@ -81,7 +88,6 @@ class NavBar extends React.Component {
           <IconButton
             onClick={handleCurrentPageChange("signup")}
             className={classes.navbarTooltip}
-            style={{ borderRadius: "0px", borderRight: "0.1em solid black" }}
           >
             <PersonAdd style={{ paddingRight: "2px" }} />
             Sign up
@@ -99,10 +105,9 @@ class NavBar extends React.Component {
           <TextField
             id="search-field"
             variant="filled"
-            label="Search"
             type="text"
             value={searchValue}
-            onChange={this.handleSearchOnChange}
+            onChange={handleEnteringSearchText}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -129,7 +134,8 @@ class NavBar extends React.Component {
       classes,
       handleCurrentPageChange,
       currentUser,
-      handleSearchFromNavbar
+      handleSearchFromNavbar,
+      handleEnteringSearchText
     } = this.props;
     return (
       <div className={classes.sectionDesktop}>
@@ -163,10 +169,9 @@ class NavBar extends React.Component {
           <TextField
             id="search-field"
             variant="filled"
-            label="Search"
             type="text"
             value={searchValue}
-            onChange={this.handleSearchOnChange}
+            onChange={handleEnteringSearchText}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -196,10 +201,7 @@ class NavBar extends React.Component {
           <Typography variant="title">
             Hello, {`${currentUser.username}`}
           </Typography>
-          <IconButton
-            onClick={this.handleProfileIconClick}
-            className={classes.navbarTooltip}
-          >
+          <IconButton onClick={this.handleProfileIconClick}>
             <AccountCircle style={{ paddingRight: "2px" }} />
           </IconButton>
           <Menu

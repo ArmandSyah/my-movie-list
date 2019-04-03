@@ -33,7 +33,7 @@ class Showcase extends React.Component {
         >
           {title}
         </Typography>
-        <GridList className={classes.gridList} cols={2} cellHeight="360">
+        <GridList className={classes.gridList} cols={2} cellHeight="625">
           {tileData.map(tile => (
             <GridListTile key={tile.coverImage}>
               <img src={tile.coverImage} alt={tile.title} />

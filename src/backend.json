@@ -16,7 +16,7 @@
     },
     {
       "id": 2,
-      "title": "Silicon Valley ",
+      "title": "Silicon Valley",
       "type": "TV",
       "description": "Follows the struggle of Richard Hendricks, a Silicon Valley engineer trying to build his own company called Pied Piper.",
       "start date": "6 April 2014",
@@ -25,7 +25,7 @@
       "episodes": 46,
       "genres": "Comedy",
       "averageScore": 8.5,
-      "coverImage": "https://cdn.vox-cdn.com/thumbor/7agamiK3RAShiy1GCRUQTuJf3LM=/0x0:1920x1080/1200x800/filters:focal(807x387:1113x693)/cdn.vox-cdn.com/uploads/chorus_image/image/54950149/7032_1458680567.0.jpg",
+      "coverImage": "https://www.bing.com/th?id=OIP.PLnn6wJ15SKDC-f8jJ-c1wHaK-&pid=Api&rs=1&p=0",
       "bannerImage": "https://meplustv.files.wordpress.com/2016/07/siliconvalleybanner.jpg"
     },
     {
@@ -171,7 +171,7 @@
       "progress": 1,
       "score": 10,
       "status": "Finished",
-      "lastUpdated": "April 1, 2019"
+      "lastUpdated": "March 1, 2019"
     },
     {
       "id": 2,
@@ -180,7 +180,7 @@
       "progress": 24,
       "score": 7,
       "status": "Currently Watching",
-      "lastUpdated": "April 24, 2019"
+      "lastUpdated": "March 24, 2019"
     },
     {
       "id": 3,
@@ -189,7 +189,7 @@
       "progress": 1,
       "score": 4,
       "status": "Finished",
-      "lastUpdated": "April 2, 2019"
+      "lastUpdated": "March 2, 2019"
     },
     {
       "id": 4,
@@ -198,7 +198,7 @@
       "progress": 1,
       "score": 10,
       "status": "Finished",
-      "lastUpdated": "April 5, 2019"
+      "lastUpdated": "March 5, 2019"
     }
   ]
 }

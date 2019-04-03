@@ -120,7 +120,6 @@ class BrowsePage extends React.Component {
             const searchResults = media.filter(m =>
               m.title.toLowerCase().includes(searchValue.toLowerCase())
             );
-            console.log(searchResults);
             this.setState({
               loading: false,
               success: true,
