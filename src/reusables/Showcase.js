@@ -35,12 +35,12 @@ class Showcase extends React.Component {
         </Typography>
         <GridList className={classes.gridList} cols={2} cellHeight="360">
           {tileData.map(tile => (
-            <GridListTile key={tile.coverImage} style={{ cursor: "pointer" }}>
+            <GridListTile key={tile.coverImage}>
               <img src={tile.coverImage} alt={tile.title} />
               <GridListTileBar
                 title={
                   <div
-                    onClick={handleEnteringMediaEntry(tile.mediaId)}
+                    onClick={handleEnteringMediaEntry(tile.id)}
                     onMouseEnter={this.handleMouseOver(tile)}
                     onMouseLeave={this.handleMouseLeave}
                     style={{
