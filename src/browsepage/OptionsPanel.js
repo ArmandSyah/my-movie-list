@@ -30,8 +30,8 @@ class OptionsPanel extends React.Component {
               input={<FilledInput name="type" id="filled-age-simple" />}
             >
               <MenuItem value="all">All</MenuItem>
-              <MenuItem value="tv">TV</MenuItem>
-              <MenuItem value="movie">Movie</MenuItem>
+              <MenuItem value="TV">TV</MenuItem>
+              <MenuItem value="MOVIE">Movie</MenuItem>
             </Select>
           </FormControl>
 

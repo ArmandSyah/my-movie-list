@@ -37,12 +37,12 @@ class BrowsePage extends React.Component {
     const { type, sort } = this.state;
     let currentResults = results;
     switch (type) {
-      case "tv":
-        currentResults = currentResults.filter(result => result.type === "tv");
+      case "TV":
+        currentResults = currentResults.filter(result => result.type === "TV");
         break;
-      case "movie":
+      case "MOVIE":
         currentResults = currentResults.filter(
-          result => result.type === "movie"
+          result => result.type === "MOVIE"
         );
         break;
       case "all":

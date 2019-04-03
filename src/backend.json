@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Black Mirror: Bandersnatch",
-      "type": "movie",
+      "type": "MOVIE",
       "description": "In 1984, a young programmer begins to question reality as he works to adapt a fantasy novel into a video game.",
       "start date": "28 December 2018",
       "end date": "28 December 2018",
@@ -17,7 +17,7 @@
     {
       "id": 2,
       "title": "Silicon Valley ",
-      "type": "tv",
+      "type": "TV",
       "description": "Follows the struggle of Richard Hendricks, a Silicon Valley engineer trying to build his own company called Pied Piper.",
       "start date": "6 April 2014",
       "end date": "Present",
@@ -31,7 +31,7 @@
     {
       "id": 3,
       "title": "Star Wars: Episode IV",
-      "type": "movie",
+      "type": "MOVIE",
       "description": "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
       "start date": "25 May 1977",
       "end date": "25 May 1977",
@@ -45,7 +45,7 @@
     {
       "id": 4,
       "title": "My Hero Academia",
-      "type": "tv",
+      "type": "TV",
       "description": "Izuku has dreamt of being a hero all his life—a lofty goal for anyone, but especially challenging for a kid with no superpowers. That’s right, in a world where eighty percent of the population has some kind of super-powered “quirk,” Izuku was unlucky enough to be born completely normal. But that’s not enough to stop him from enrolling in one of the world’s most prestigious hero academies",
       "start date": "3 April 2016",
       "end date": "Present",
@@ -59,7 +59,7 @@
     {
       "id": 5,
       "title": "Mr. Robot",
-      "type": "tv",
+      "type": "TV",
       "description": "Elliot, a brilliant but highly unstable young cyber-security engineer and vigilante hacker, becomes a key figure in a complex game of global dominance when he and his shadowy allies try to take down the corrupt corporation he works for.",
       "start date": "24 June 2015",
       "end date": "Present",
