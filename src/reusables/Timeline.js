@@ -5,7 +5,7 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
-import { Typography, withStyles, CssBaseline } from "@material-ui/core";
+import { Typography, withStyles, CssBaseline, Button } from "@material-ui/core";
 import { indigo, green, red } from "@material-ui/core/colors";
 import styles from "./Styles";
 
@@ -36,6 +36,7 @@ class ActivityRecord extends React.Component {
 
 class LogoutPreview extends React.Component {
   render() {
+    const { handleCurrentPageChange } = this.props;
     return (
       <div
         style={{
@@ -51,6 +52,20 @@ class LogoutPreview extends React.Component {
         <Typography component="h1" variant="h4">
           Log in or Sign up, to see your Activity Timeline
         </Typography>
+        <Button
+          variant="contained"
+          onClick={handleCurrentPageChange("login")}
+          style={{ marginBottom: "20px", flex: "1 1 0" }}
+        >
+          Log in
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleCurrentPageChange("signup")}
+          style={{ marginBottom: "20px", flex: "1 1 0" }}
+        >
+          Sign up
+        </Button>
       </div>
     );
   }
@@ -80,8 +95,45 @@ class Timeline extends React.Component {
     });
   }
 
+  renderRecords() {
+    const { handleCurrentPageChange } = this.props;
+    const { records } = this.state;
+    if (records.length === 0) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            paddingTop: "30px",
+            paddingLeft: "30px"
+          }}
+        >
+          <CssBaseline />
+          <Typography
+            component="h1"
+            variant="h4"
+            style={{ paddingBottom: "30px" }}
+          >
+            Start looking for your favourite shows
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={handleCurrentPageChange("browse")}
+            style={{ marginBottom: "20px", flex: "1 1 0" }}
+          >
+            Browse
+          </Button>
+        </div>
+      );
+    }
+
+    return <VerticalTimeline layout="1-column">{records}</VerticalTimeline>;
+  }
+
   render() {
-    const { classes, isLoggedIn } = this.props;
+    const { classes, isLoggedIn, handleCurrentPageChange } = this.props;
     const { records } = this.state;
     return (
       <main className={classes.main}>
@@ -96,9 +148,9 @@ class Timeline extends React.Component {
             Activity Timeline
           </Typography>
           {!isLoggedIn ? (
-            <LogoutPreview />
+            <LogoutPreview handleCurrentPageChange={handleCurrentPageChange} />
           ) : (
-            <VerticalTimeline layout="1-column">{records}</VerticalTimeline>
+            this.renderRecords()
           )}
         </div>
       </main>

@@ -177,7 +177,7 @@ class App extends Component {
       listEntry => listEntry.id === listEntryId
     );
     listEntries[findUpdateIndex] = updatedListEntry;
-    backendData = { listEntries, ...backendData };
+    backendData = { ...backendData, listEntries };
 
     this.setState({
       backendData,
@@ -187,12 +187,26 @@ class App extends Component {
     });
   };
 
+  handleEditToReview = (reviewId, reviewText, score) => {
+    let { backendData } = this.state;
+    const { reviews } = backendData;
+
+    const reviewToUpdate = reviews.filter(review => review.id === reviewId)[0];
+
+    const updatedReview = { ...reviewToUpdate, reviewText, score };
+    const findUpdateIndex = reviews.findIndex(review => review.id === reviewId);
+    reviews[findUpdateIndex] = updatedReview;
+    backendData = { ...backendData, reviews };
+    this.setState({ backendData });
+  };
+
   render() {
     const {
       backendData,
       currentSelectedMediaId,
       loggedIn,
       currentUser,
+      currentUserId,
       currentUserListEntries
     } = this.state;
     const pages = {
@@ -202,6 +216,7 @@ class App extends Component {
           handleEnteringMediaEntry={this.handleEnteringMediaEntry}
           currentUserListEntries={currentUserListEntries}
           isLoggedIn={loggedIn}
+          handleCurrentPageChange={this.handleCurrentPageChange}
         />
       ),
       signup: <SignupPage handleSignup={this.handleSignup} />,
@@ -222,6 +237,12 @@ class App extends Component {
           users={backendData.users}
           handleAddReview={this.handleAddReview}
           handleAddToList={this.handleAddToList}
+          isLoggedIn={loggedIn}
+          handleCurrentPageChange={this.handleCurrentPageChange}
+          handleEditToListEntry={this.handleEditToListEntry}
+          currentUserListEntries={currentUserListEntries}
+          handleEditToReview={this.handleEditToReview}
+          currentUserId={currentUserId}
         />
       ),
       myList: (

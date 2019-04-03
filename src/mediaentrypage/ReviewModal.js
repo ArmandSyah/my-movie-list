@@ -18,9 +18,10 @@ import MMLModal from "../reusables/MMLModal";
 class ModalContent extends React.Component {
   constructor(props) {
     super(props);
+    const { reviewScore, reviewText } = this.props;
     this.state = {
-      score: 1,
-      reviewText: ""
+      score: reviewScore,
+      reviewText: reviewText
     };
   }
 
@@ -34,14 +35,24 @@ class ModalContent extends React.Component {
 
   handleModalUpdate = () => {
     const { score, reviewText } = this.state;
-    const { handleAddReview, handleModalClose } = this.props;
-    handleAddReview(score, reviewText);
+    const {
+      handleAddReview,
+      handleModalClose,
+      handleEditToReview,
+      reviewedByUser,
+      reviewId
+    } = this.props;
+    if (reviewedByUser) {
+      handleEditToReview(reviewId, reviewText, score);
+    } else {
+      handleAddReview(score, reviewText);
+    }
     handleModalClose();
   };
 
   render() {
     const { score, reviewText } = this.state;
-    const { cover, title, classes } = this.props;
+    const { cover, title, classes, reviewedByUser } = this.props;
     return (
       <div>
         <div
@@ -142,7 +153,7 @@ class ModalContent extends React.Component {
                 disabled={reviewText.length === 0}
                 color="primary"
               >
-                Add Review
+                {reviewedByUser ? "Edit your review" : "Add Review"}
               </Button>
             </div>
           </div>
@@ -160,7 +171,12 @@ class ReviewModal extends React.Component {
       mediaEntry,
       modalOpen,
       handleModalClose,
-      handleAddReview
+      handleAddReview,
+      handleEditToReview,
+      reviewedByUser,
+      reviewScore,
+      reviewText,
+      reviewId
     } = this.props;
     const { id, coverImage, bannerImage, title } = mediaEntry;
     return (
@@ -175,6 +191,11 @@ class ReviewModal extends React.Component {
           title={title}
           handleAddReview={handleAddReview}
           handleModalClose={handleModalClose}
+          handleEditToReview={handleEditToReview}
+          reviewedByUser={reviewedByUser}
+          reviewScore={reviewScore}
+          reviewText={reviewText}
+          reviewId={reviewId}
         />
       </MMLModal>
     );

@@ -37,7 +37,8 @@ class HomePage extends React.Component {
       handleEnteringMediaEntry,
       currentUserListEntries,
       media,
-      isLoggedIn
+      isLoggedIn,
+      handleCurrentPageChange
     } = this.props;
     const { newestMedia, mostPopularMedia } = this.state;
 
@@ -81,6 +82,7 @@ class HomePage extends React.Component {
               currentUserListEntries={currentUserListEntries}
               media={media}
               isLoggedIn={isLoggedIn}
+              handleCurrentPageChange={handleCurrentPageChange}
             />
           </div>
         </div>

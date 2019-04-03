@@ -17,10 +17,11 @@ import MMLModal from "../reusables/MMLModal";
 class ModalContent extends React.Component {
   constructor(props) {
     super(props);
+    const { status, score, progress } = this.props;
     this.state = {
-      status: "Currently Watching",
-      score: 1,
-      progress: 1
+      status,
+      score,
+      progress
     };
   }
 
@@ -30,14 +31,24 @@ class ModalContent extends React.Component {
 
   handleModalUpdate = () => {
     const { status, score, progress } = this.state;
-    const { handleAddToList, handleModalClose } = this.props;
-    handleAddToList(status, score, progress);
+    const {
+      handleAddToList,
+      handleEditToListEntry,
+      handleModalClose,
+      inUsersList,
+      listEntryId
+    } = this.props;
+    if (inUsersList) {
+      handleEditToListEntry(listEntryId, status, score, progress);
+    } else {
+      handleAddToList(status, score, progress);
+    }
     handleModalClose();
   };
 
   render() {
     const { status, score, progress } = this.state;
-    const { cover, title, episodes, classes } = this.props;
+    const { cover, title, episodes, classes, inUsersList } = this.props;
     return (
       <div>
         <div
@@ -162,7 +173,7 @@ class ModalContent extends React.Component {
                 onClick={this.handleModalUpdate}
                 color="primary"
               >
-                Add to Your List
+                {inUsersList ? "Edit your entry" : "Add to Your List"}
               </Button>
             </div>
           </div>
@@ -180,7 +191,13 @@ class AddToListModal extends React.Component {
       mediaEntry,
       modalOpen,
       handleModalClose,
-      handleAddToList
+      handleAddToList,
+      status,
+      score,
+      progress,
+      inUsersList,
+      handleEditToListEntry,
+      listEntryId
     } = this.props;
     const { id, coverImage, bannerImage, title, episodes } = mediaEntry;
     return (
@@ -196,6 +213,12 @@ class AddToListModal extends React.Component {
           handleAddToList={handleAddToList}
           handleModalClose={handleModalClose}
           episodes={episodes}
+          status={status}
+          score={score}
+          progress={progress}
+          inUsersList={inUsersList}
+          handleEditToListEntry={handleEditToListEntry}
+          listEntryId={listEntryId}
         />
       </MMLModal>
     );

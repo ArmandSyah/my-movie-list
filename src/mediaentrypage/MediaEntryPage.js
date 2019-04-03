@@ -13,7 +13,13 @@ class MediaEntryPage extends React.Component {
       reviews,
       users,
       handleAddReview,
-      handleAddToList
+      handleAddToList,
+      isLoggedIn,
+      handleCurrentPageChange,
+      handleEditToListEntry,
+      currentUserListEntries,
+      handleEditToReview,
+      currentUserId
     } = this.props;
     const mediaEntry = media.filter(m => m.id === mediaId)[0];
     const { bannerImage, coverImage, title, description } = mediaEntry;
@@ -33,7 +39,7 @@ class MediaEntryPage extends React.Component {
           style={{
             flexGrow: 3,
             paddingTop: "20px",
-            paddingLeft: "28%"
+            paddingLeft: "10%"
           }}
         >
           <MediaInfo
@@ -42,6 +48,13 @@ class MediaEntryPage extends React.Component {
             mediaEntry={mediaEntry}
             handleAddReview={handleAddReview}
             handleAddToList={handleAddToList}
+            isLoggedIn={isLoggedIn}
+            handleCurrentPageChange={handleCurrentPageChange}
+            handleEditToListEntry={handleEditToListEntry}
+            currentUserListEntries={currentUserListEntries}
+            mediaId={mediaId}
+            handleEditToReview={handleEditToReview}
+            currentUserId={currentUserId}
           />
         </div>
       </div>

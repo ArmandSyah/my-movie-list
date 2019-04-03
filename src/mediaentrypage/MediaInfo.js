@@ -25,6 +25,53 @@ class MediaInfo extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const { mediaId, currentUserListEntries, reviews, currentUserId } = props;
+    const foundEntry = currentUserListEntries.filter(
+      listEntry => listEntry.mediaId === mediaId
+    );
+    const foundReview =
+      currentUserId === null
+        ? null
+        : reviews.filter(
+            review =>
+              review.mediaId === mediaId && review.userId === currentUserId
+          );
+    const stateObject = {};
+
+    if (foundEntry.length === 0) {
+      stateObject["inUsersList"] = false;
+      stateObject["listEntryId"] = null;
+      stateObject["status"] = "Currently Watching";
+      stateObject["score"] = 1;
+      stateObject["progress"] = 1;
+    } else {
+      const entry = foundEntry[0];
+      const { score, progress, status } = entry;
+      stateObject["inUsersList"] = true;
+      stateObject["listEntryId"] = entry.id;
+      stateObject["status"] = status;
+      stateObject["score"] = score;
+      stateObject["progress"] = progress;
+    }
+
+    if (foundReview === null || foundReview.length === 0) {
+      stateObject["reviewedByUser"] = false;
+      stateObject["reviewId"] = null;
+      stateObject["reviewText"] = "";
+      stateObject["reviewScore"] = 1;
+    } else {
+      const review = foundReview[0];
+      const { reviewText, score } = review;
+      stateObject["reviewedByUser"] = true;
+      stateObject["reviewId"] = review.id;
+      stateObject["reviewText"] = reviewText;
+      stateObject["reviewScore"] = score;
+    }
+
+    return stateObject;
+  }
+
   handleReviewModalOpen = () => {
     this.setState({ reviewModalOpen: true });
   };
@@ -41,29 +88,94 @@ class MediaInfo extends React.Component {
     this.setState({ addListModalOpen: false });
   };
 
+  renderButtons() {
+    const { inUsersList, reviewedByUser } = this.state;
+    const { isLoggedIn, handleCurrentPageChange } = this.props;
+
+    if (!isLoggedIn) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            maxWidth: "250px",
+            alignItems: "center"
+          }}
+        >
+          <Typography
+            variant="subheading"
+            align="center"
+            style={{ marginBottom: "20px" }}
+          >
+            To start tracking this show, or reviewing it log in or sign up
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={handleCurrentPageChange("login")}
+            style={{ marginBottom: "20px" }}
+          >
+            Log In
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleCurrentPageChange("signup")}
+          >
+            Sign up
+          </Button>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        style={{ display: "flex", flexDirection: "column", maxWidth: "250px" }}
+      >
+        <Button
+          variant="contained"
+          onClick={this.handleAddListModalOpen}
+          style={{ marginBottom: "20px" }}
+        >
+          {inUsersList ? "Edit this entry" : "Add to List"}
+        </Button>
+        <Button variant="contained" onClick={this.handleReviewModalOpen}>
+          {reviewedByUser ? "Edit your review" : "Write Review"}
+        </Button>
+      </div>
+    );
+  }
+
   render() {
-    const { reviewModalOpen, addListModalOpen } = this.state;
+    const {
+      reviewModalOpen,
+      addListModalOpen,
+      inUsersList,
+      listEntryId,
+      status,
+      score,
+      progress,
+      reviewedByUser,
+      reviewScore,
+      reviewText,
+      reviewId
+    } = this.state;
     const {
       reviews,
       users,
       mediaEntry,
       handleAddReview,
-      handleAddToList
+      handleAddToList,
+      handleEditToListEntry,
+      handleEditToReview
     } = this.props;
     return (
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Button
-            variant="contained"
-            onClick={this.handleAddListModalOpen}
-            style={{ marginBottom: "20px" }}
-          >
-            Add to List
-          </Button>
-          <Button variant="contained" onClick={this.handleReviewModalOpen}>
-            Write Review
-          </Button>
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center"
+        }}
+      >
+        {this.renderButtons()}
         <div
           style={{
             marginLeft: "5%",
@@ -160,12 +272,23 @@ class MediaInfo extends React.Component {
           modalOpen={reviewModalOpen}
           mediaEntry={mediaEntry}
           handleAddReview={handleAddReview}
+          handleEditToReview={handleEditToReview}
+          reviewedByUser={reviewedByUser}
+          reviewScore={reviewScore}
+          reviewText={reviewText}
+          reviewId={reviewId}
         />
         <AddToListModal
+          handleEditToListEntry={handleEditToListEntry}
           handleModalClose={this.handleAddListModalClose}
           modalOpen={addListModalOpen}
           mediaEntry={mediaEntry}
           handleAddToList={handleAddToList}
+          inUsersList={inUsersList}
+          status={status}
+          score={score}
+          progress={progress}
+          listEntryId={listEntryId}
         />
       </div>
     );
