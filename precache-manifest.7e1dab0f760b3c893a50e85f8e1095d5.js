@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/my-movie-list/static/js/runtime~main.276be067.js"
   },
   {
-    "revision": "8da1b67a02cd2cca4e4b",
-    "url": "/my-movie-list/static/js/main.a4c86a39.chunk.js"
+    "revision": "24269f93b98029bf0a21",
+    "url": "/my-movie-list/static/js/main.2ade9295.chunk.js"
   },
   {
-    "revision": "993f467611e7a6d64235",
-    "url": "/my-movie-list/static/js/2.42016a75.chunk.js"
+    "revision": "7597ae97ab533d5adbaf",
+    "url": "/my-movie-list/static/js/2.7257315f.chunk.js"
   },
   {
-    "revision": "8da1b67a02cd2cca4e4b",
+    "revision": "24269f93b98029bf0a21",
     "url": "/my-movie-list/static/css/main.4f1abbd3.chunk.css"
   },
   {
-    "revision": "993f467611e7a6d64235",
+    "revision": "7597ae97ab533d5adbaf",
     "url": "/my-movie-list/static/css/2.efe65d0a.chunk.css"
   },
   {
-    "revision": "23e63c29bfddbec790dbc0ea44e9e1c3",
+    "revision": "7196769ba6545728bfb2c9ec974de14d",
     "url": "/my-movie-list/index.html"
   }
 ];
