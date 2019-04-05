@@ -32,7 +32,7 @@ class MyListResultsDisplay extends React.Component {
     } = this.props;
     return (
       <div
-        style={{ paddingTop: "25px", display: "flex", flexDirection: "column" }}
+        style={{ paddingTop: "25px", display: "flex", flexDirection: "column", minWidth: "1065px" }}
       >
         <div style={{ paddingBottom: "15px", alignSelf: "flex-end" }}>
           <Button

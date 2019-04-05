@@ -107,7 +107,8 @@ class App extends Component {
       currentUserId: null,
       currentUser: null,
       currentPage: "home",
-      currentSearchText: ""
+      currentSearchText: "",
+      currentUserListEntries: []
     });
   };
 
